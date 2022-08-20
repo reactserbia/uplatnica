@@ -6,7 +6,7 @@ import styled from "styled-components";
 import Textarea from "./components/Textarea.jsx";
 import Input from "./components/Input.jsx";
 
-import {QRCodeSVG} from "qrcode.react";
+import { QRCodeSVG } from "qrcode.react";
 
 function App() {
   const [payer, setPayer] = useState("");
@@ -38,7 +38,8 @@ function App() {
   const [paymentNumber, setPaymentChange] = useState("");
   const onPaymentNumberChange = (event) => setPaymentChange(event.target.value);
 
-  const qrModel = 'K:PR|V:01|C:1|R:20012237410606|N:Milos, Beograd|I:RSD25000,00|SF:289|S:Transakcije gradjana'
+  const qrModel =
+    `K:PR|V:01|C:1|R:${accountReceivable}|N:${receiver}|I:RSD${totalAmount}|SF:289|S:${paymentDescription}`;
 
   return (
     <Container>
@@ -55,36 +56,22 @@ function App() {
           value={receiver}
           whenChanged={onReceiverChange}
         />
-        <button
-          onClick={() =>
-            console.log(
-              payer,
-              paymentDescription,
-              receiver,
-              payCode,
-              currencyCode,
-              totalAmount,
-              accountReceivable,
-              modelCode,
-              paymentNumber
-            )
-          }
-        >
-          C
-        </button>
       </LeftSide>
       <RightSide>
         <Input
+          width={15}
           label="Sifra Pacanja"
           value={payCode}
           whenChanged={onPayCodeChange}
         />
         <Input
+          width={15}
           label="Valuta"
           value={currencyCode}
           whenChanged={onCurrencyCode}
         />
         <Input
+          width={70}
           label="Iznos"
           value={totalAmount}
           whenChanged={onTotalAmountChange}
@@ -95,26 +82,47 @@ function App() {
           whenChanged={onAccountReceivableChange}
         />
         <Input
+          width={25}
           label="Model"
           value={modelCode}
           whenChanged={onSetModelCodeChange}
         />
         <Input
+          width={75}
           label="Poziv na broj"
           value={paymentNumber}
           whenChanged={onPaymentNumberChange}
         />
-      </RightSide>
+        {/*<button*/}
+        {/*    onClick={() =>*/}
+        {/*        console.log(*/}
+        {/*            payer,*/}
+        {/*            paymentDescription,*/}
+        {/*            receiver,*/}
+        {/*            payCode,*/}
+        {/*            currencyCode,*/}
+        {/*            totalAmount,*/}
+        {/*            accountReceivable,*/}
+        {/*            modelCode,*/}
+        {/*            paymentNumber*/}
+        {/*        )*/}
+        {/*    }*/}
+        {/*>*/}
+        {/*  Napravi NBS QRcode*/}
+        {/*</button>*/}
 
-      <QRCodeSVG value={qrModel} />
+
+        <QRCodeSVG value={qrModel} />
+
+      </RightSide>
 
     </Container>
   );
 }
 
 const Container = styled.div`
-  height: 100mm;
-  width: 209mm;
+  width: 100%;
+  max-width: 771px;
   position: relative;
   border: solid 1px #fff;
   font-family: Arial, Helvetica, sans-serif;
@@ -123,6 +131,15 @@ const Container = styled.div`
   margin-left: auto;
   margin-right: auto;
   padding: 6mm;
+  &::before {
+    border-right: solid 1px #fff;
+    content: "";
+    display: block;
+    height: 70%;
+    left: 47.7%;
+    position: absolute;
+    top: 10%;
+  }
 `;
 
 const BankSlipTitle = styled.div`
@@ -136,14 +153,13 @@ const BankSlipTitle = styled.div`
 const LeftSide = styled.div`
   display: inline-block;
   vertical-align: top;
-  width: 30%;
+  width: 50%;
 `;
 
 const RightSide = styled.div`
   display: inline-block;
   vertical-align: top;
-  width: 30%;
-  background-color: red;
+  width: 50%;
 `;
 
 export default App;
