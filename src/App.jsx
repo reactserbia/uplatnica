@@ -38,8 +38,7 @@ function App() {
   const [paymentNumber, setPaymentChange] = useState("");
   const onPaymentNumberChange = (event) => setPaymentChange(event.target.value);
 
-  const qrModel =
-    `K:PR|V:01|C:1|R:${accountReceivable}|N:${receiver}|I:RSD${totalAmount}|SF:289|S:${paymentDescription}`;
+  const qrModel = `K:PR|V:01|C:1|R:${accountReceivable}|N:${receiver}|I:RSD${totalAmount}|P:${payer}|SF:${payCode}|S:${paymentDescription}|RO:${modelCode}${paymentNumber}`;
 
   return (
     <Container>
@@ -93,29 +92,9 @@ function App() {
           value={paymentNumber}
           whenChanged={onPaymentNumberChange}
         />
-        {/*<button*/}
-        {/*    onClick={() =>*/}
-        {/*        console.log(*/}
-        {/*            payer,*/}
-        {/*            paymentDescription,*/}
-        {/*            receiver,*/}
-        {/*            payCode,*/}
-        {/*            currencyCode,*/}
-        {/*            totalAmount,*/}
-        {/*            accountReceivable,*/}
-        {/*            modelCode,*/}
-        {/*            paymentNumber*/}
-        {/*        )*/}
-        {/*    }*/}
-        {/*>*/}
-        {/*  Napravi NBS QRcode*/}
-        {/*</button>*/}
-
 
         <QRCodeSVG value={qrModel} />
-
       </RightSide>
-
     </Container>
   );
 }
