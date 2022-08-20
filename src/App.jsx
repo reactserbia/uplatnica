@@ -6,6 +6,8 @@ import styled from "styled-components";
 import Textarea from "./components/Textarea.jsx";
 import Input from "./components/Input.jsx";
 
+import {QRCodeSVG} from "qrcode.react";
+
 function App() {
   const [payer, setPayer] = useState("");
   const onPayerChange = (event) => setPayer(event.target.value);
@@ -35,6 +37,8 @@ function App() {
 
   const [paymentNumber, setPaymentChange] = useState("");
   const onPaymentNumberChange = (event) => setPaymentChange(event.target.value);
+
+  const qrModel = 'K:PR|V:01|C:1|R:20012237410606|N:Milos, Beograd|I:RSD25000,00|SF:289|S:Transakcije gradjana'
 
   return (
     <Container>
@@ -101,6 +105,9 @@ function App() {
           whenChanged={onPaymentNumberChange}
         />
       </RightSide>
+
+      <QRCodeSVG value={qrModel} />
+
     </Container>
   );
 }
