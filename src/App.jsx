@@ -1,6 +1,5 @@
 import { useState } from "react";
 import "./App.css";
-import "./uplatnica.scss";
 import styled from "styled-components";
 
 import Textarea from "./components/Textarea.jsx";
