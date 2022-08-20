@@ -1,0 +1,662 @@
+@import "compass";
+
+$color: #fff;
+$font-size: 3mm;
+
+$border-color: #fff;
+// $border-color--hover: #4285F4;
+$border-color--hover: $border-color;
+$border-color--focus: $border-color--hover;
+
+// $unit: 1px;
+$field-unit: 1mm;
+$field-unit-size: 1 * $field-unit;
+
+$field-width--xxs: 12 * $field-unit-size;
+$field-width--xs: 12 * $field-unit-size;
+$field-width--s: 51 * $field-unit-size;
+$field-width--m: 71 * $field-unit-size;
+$field-width--l: 93 * $field-unit-size;
+$field-width--xl: 88.5 * $field-unit-size;
+$field-width--xxl: 91 * $field-unit-size;
+$field-width--xxxl: 91 * $field-unit-size;
+
+$field-height--xxs: 7 * $field-unit-size;
+$field-height--xs: 7 * $field-unit-size;
+$field-height--s: 7 * $field-unit-size;
+$field-height--m: 7 * $field-unit-size;
+$field-height--l: 7 * $field-unit-size;
+$field-height--xl: 7 * $field-unit-size;
+$field-height--xxl: 7 * $field-unit-size;
+$field-height--xxxl: 15 * $field-unit-size;
+
+$sizes: xxs, xs, s, m, l, xl, xxl, xxxl;
+
+.bankslip__wrapper {
+  margin-top: 30mm;
+  marks: cross;
+}
+
+.bankslip {
+  border: solid 1px #fff;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 3mm;
+  height: 100mm;
+  line-height: 1.2em;
+  margin-left: auto;
+  margin-right: auto;
+  overflow: hidden;
+  padding: 6mm;
+  position: relative;
+  width: 209mm;
+}
+.bankslip,
+.bankslip * {
+}
+
+.bankslip__inner {
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.bankslip__inner:before {
+  border-right: solid 1px #fff;
+  content: "";
+  display: block;
+  height: 73mm;
+  left: 104mm;
+  position: absolute;
+  top: 14mm;
+}
+@media print {
+  .bankslip__inner {
+    background-color: transparent;
+  }
+}
+
+.bankslip-title {
+  color: #fff;
+  font-size: 4.95mm;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+[class*="bankslip__form-item"] {
+  z-index: 10;
+}
+[class*="bankslip__form-item"] label {
+  display: block;
+  padding-bottom: 1mm;
+}
+
+[class*="bankslip__form-item"] input,
+[class*="bankslip__form-item"] textarea {
+  background-color: rgba(255, 255, 255, 0);
+  border: solid 1px #fff;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 3.9mm;
+  padding: 0.5mm 2mm;
+}
+[class*="bankslip__form-item"] input,
+[class*="bankslip__form-item"] textarea,
+[class*="bankslip__form-item"] input:focus,
+[class*="bankslip__form-item"] textarea:focus {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  outline: none;
+}
+[class*="bankslip__form-item"] input:focus,
+[class*="bankslip__form-item"] textarea:focus {
+  border-color: #fff;
+  border-style: dashed;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+}
+[class*="bankslip__form-item"] input.bankslip-border-double,
+[class*="bankslip__form-item"] textarea.bankslip-border-double {
+  border-width: 0.7mm;
+}
+[class*="bankslip__form-item"] input.bankslip-border-double:focus,
+[class*="bankslip__form-item"] textarea.bankslip-border-double:focus {
+  border-width: 1px;
+}
+
+.bankslip__field-size--xxs {
+  height: 7mm;
+  width: 12mm;
+}
+
+.bankslip__field-size--xs {
+  height: 7mm;
+  width: 12mm;
+}
+
+.bankslip__field-size--s {
+  height: 7mm;
+  width: 51mm;
+}
+
+.bankslip__field-size--m {
+  height: 7mm;
+  width: 71mm;
+}
+
+.bankslip__field-size--l {
+  height: 7mm;
+  width: 93mm;
+}
+
+.bankslip__field-size--xl {
+  height: 7mm;
+  width: 88.5mm;
+}
+
+.bankslip__field-size--xxl {
+  height: 7mm;
+  width: 91mm;
+}
+
+.bankslip__field-size--xxxl {
+  height: 15mm;
+  width: 91mm;
+}
+
+[class*="bankslip__form-item"] textarea {
+  resize: none;
+}
+
+.bankslip__form-item--payer,
+.bankslip__form-item--purpose,
+.bankslip__form-item--recipient {
+  position: absolute;
+  left: 6mm;
+}
+
+.bankslip-title,
+.bankslip__form-item--value,
+.bankslip__form-item--code,
+.bankslip__form-item--currency,
+.bankslip__form-item--account,
+.bankslip__form-item--model,
+.bankslip__form-item--reference {
+  position: absolute;
+  right: 5.5mm;
+}
+
+.bankslip-title {
+  right: 6mm;
+  top: 6.5mm;
+}
+
+.bankslip__form-item--payer {
+  top: 9.5mm;
+}
+
+.bankslip__form-item--purpose {
+  top: 30.5mm;
+}
+.bankslip__form-item--purpose textarea {
+  height: 14.5mm;
+}
+
+.bankslip__form-item--recipient {
+  top: 51mm;
+}
+
+.bankslip__form-item--value {
+  top: 13.5mm;
+}
+
+.bankslip__form-item--code {
+  right: 80mm;
+  top: 10mm;
+  width: 14mm;
+}
+
+.bankslip__form-item--currency {
+  right: 64mm;
+  top: 13.5mm;
+}
+.bankslip__form-item--currency input {
+  width: 12.5mm;
+}
+
+.bankslip__form-item--account {
+  top: 27mm;
+}
+
+.bankslip__form-item--model {
+  right: 83.5mm;
+  top: 40.5mm;
+}
+.bankslip__form-item--model input {
+  width: 10.5mm;
+}
+
+.bankslip__form-item--reference {
+  top: 40.5mm;
+}
+
+.bankslip__form-item--stamp {
+  bottom: 16.5mm;
+  left: 6mm;
+  position: absolute;
+}
+.bankslip__form-item--stamp input,
+.bankslip__form-item--stamp input:focus {
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+}
+.bankslip__form-item--stamp label {
+  padding-bottom: 0;
+  padding-top: 1mm;
+}
+
+.bankslip__form-item--date {
+  bottom: 8mm;
+  left: 49mm;
+  position: absolute;
+  z-index: 5;
+}
+.bankslip__form-item--date input,
+.bankslip__form-item--date input:focus {
+  border-left: none;
+  border-right: none;
+  border-top: none;
+}
+.bankslip__form-item--date input {
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+  width: 48mm;
+}
+.bankslip__form-item--date label {
+  padding-bottom: 0;
+  padding-top: 1mm;
+}
+
+.bankslip__form-item--date2 {
+  bottom: 8mm;
+  left: 115mm;
+  position: absolute;
+}
+.bankslip__form-item--date2 input,
+.bankslip__form-item--date2 input:focus {
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+}
+.bankslip__form-item--date2 label {
+  padding-bottom: 0;
+  padding-top: 1mm;
+}
+
+.bankslip__form-number {
+  bottom: 3.5mm;
+  font-size: 2.4mm;
+  left: 96mm;
+  position: absolute;
+}
+
+.bankslip__number {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+  bottom: 3.5mm;
+  cursor: pointer;
+  font-size: 2.7mm;
+  outline: none;
+  right: 5mm;
+  padding: 1mm 0;
+  position: absolute;
+  text-align: center;
+  width: 3mm;
+}
+
+@page {
+  size: A4;
+  margin: 0;
+}
+@media print {
+  html,
+  body {
+    width: 210mm;
+    height: 297mm;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+//
+//// MIXINS
+//@mixin field-size($width, $height) {
+//  height: $height;
+//  width: $width;
+//}
+//
+//.bankslip__wrapper {
+//  margin-top: 30mm;
+//  marks: cross cross;
+//}
+//
+//.bankslip {
+//  // background: {
+//  //   image: image-url("uplatnica-skenirana.png");
+//  //   position: -2px -15px;
+//  //   repeat: no-repeat;
+//  //   size: 100% auto;
+//  // }
+//  border: solid 1px $border-color;
+//  font: {
+//    family: Arial, Helvetica, sans-serif;
+//    size: $font-size;
+//  }
+//  height: 100mm;
+//  line-height: 1.2em;
+//  margin: {
+//    left: auto;
+//    right: auto;
+//  }
+//  overflow: hidden;
+//  padding: 6mm;
+//  position: relative;
+//  width: 209mm;
+//
+//  @media print {
+//    // border: none;
+//  }
+//
+//  &,
+//  * {
+//    @include box-sizing(border-box);
+//  }
+//}
+//
+//.bankslip__inner {
+//  // background-color: rgba(#f00, 0.5);
+//  bottom: 0;
+//  left: 0;
+//  position: absolute;
+//  right: 0;
+//  top: 0;
+//
+//  &:before {
+//    border-right: solid 1px $border-color;
+//    content: "";
+//    display: block;
+//    height: 73mm;
+//    left: 104mm;
+//    position: absolute;
+//    top: 14mm;
+//  }
+//
+//  @media print {
+//    background-color: transparent;
+//  }
+//}
+//
+//.bankslip-title {
+//  color: $color;
+//  font: {
+//    size: 1.65 * $font-size;
+//    weight: 600;
+//  }
+//  text-transform: uppercase;
+//
+//}
+//
+//%form-item {
+//  label {
+//    display: block;
+//    padding-bottom: 1mm;
+//  }
+//
+//  z-index: 10;
+//}
+//
+//// PLACEHOLDERS
+//%field {
+//  background: {
+//    color: transparent;
+//    color: rgba(#fff, 0);
+//  }
+//  border: solid 1px $border-color;
+//  font: {
+//    family: Arial, Helvetica, sans-serif;
+//    size: 1.3 * $font-size;
+//  }
+//  padding: 0.5mm 2mm;
+//
+//  &,
+//  &:focus {
+//    -webkit-appearance: none;
+//    -moz-appearance: none;
+//    appearance: none;
+//    outline: none;
+//  }
+//  &:focus {
+//    border-color: $border-color--focus;
+//    border-style: dashed;
+//    @include border-radius(3px);
+//  }
+//
+//  &.bankslip-border-double {
+//    border-width: 0.7mm;
+//
+//    &:focus {
+//      border-width: 1px;
+//    }
+//  }
+//}
+//
+//%field-size--xxs  {@include field-size($field-width--xxs,  $field-height--xxs);}
+//%field-size--xs   {@include field-size($field-width--xs,   $field-height--xs);}
+//%field-size--s    {@include field-size($field-width--s,    $field-height--s);}
+//%field-size--m    {@include field-size($field-width--m,    $field-height--m);}
+//%field-size--l    {@include field-size($field-width--l,    $field-height--l);}
+//%field-size--xl   {@include field-size($field-width--xl,   $field-height--xl);}
+//%field-size--xxl  {@include field-size($field-width--xxl,  $field-height--xxl);}
+//%field-size--xxxl {@include field-size($field-width--xxxl, $field-height--xxxl);}
+//
+//[class*="bankslip__form-item"] {
+//  @extend %form-item;
+//
+//  input,
+//  textarea {
+//    @extend %field;
+//  }
+//  textarea {
+//    resize: none;
+//  }
+//}
+//
+//%bankslip__form-item--left {
+//  position: absolute;
+//  left: 6mm;
+//}
+//%bankslip__form-item--right {
+//  position: absolute;
+//  right: 5.5mm;
+//}
+//
+//.bankslip-title {
+//  @extend %bankslip__form-item--right;
+//  right: 6mm;
+//  top: 6.5mm;
+//}
+//
+//.bankslip__form-item--payer {
+//  @extend %bankslip__form-item--left;
+//  top: 9.5mm;
+//}
+//.bankslip__form-item--purpose {
+//  @extend %bankslip__form-item--left;
+//  top: 30.5mm;
+//
+//  textarea {
+//    height: 14.5mm;
+//  }
+//}
+//.bankslip__form-item--recipient {
+//  @extend %bankslip__form-item--left;
+//  top: 51mm;
+//}
+//.bankslip__form-item--value {
+//  @extend %bankslip__form-item--right;
+//  top: 13.5mm;
+//}
+//.bankslip__form-item--code {
+//  @extend %bankslip__form-item--right;
+//  right: 80mm;
+//  top: 10mm;
+//  width: 14mm;
+//}
+//.bankslip__form-item--currency {
+//  @extend %bankslip__form-item--right;
+//  right: 64mm;
+//  top: 13.5mm;
+//
+//  input {
+//    width: 12.5mm;
+//  }
+//}
+//.bankslip__form-item--account {
+//  @extend %bankslip__form-item--right;
+//  top: 27mm;
+//}
+//.bankslip__form-item--model {
+//  @extend %bankslip__form-item--right;
+//  right: 83.5mm;
+//  top: 40.5mm;
+//
+//  input {
+//    width: 10.5mm;
+//  }
+//}
+//.bankslip__form-item--reference {
+//  @extend %bankslip__form-item--right;
+//  top: 40.5mm;
+//}
+//.bankslip__form-item--stamp {
+//  bottom: 16.5mm;
+//  left: 6mm;
+//  position: absolute;
+//
+//  input,
+//  input:focus {
+//    border: {
+//      left: none;
+//      right: none;
+//      top: none;
+//    }
+//    @include border-radius(0);
+//  }
+//  label {
+//    padding: {
+//      bottom: 0;
+//      top: 1mm;
+//    }
+//  }
+//}
+//.bankslip__form-item--date {
+//  bottom: 8mm;
+//  left: 49mm;
+//  position: absolute;
+//  z-index: 5;
+//
+//
+//  input,
+//  input:focus {
+//    border: {
+//      left: none;
+//      right: none;
+//      top: none;
+//    }
+//
+//  }
+//  input {
+//    @include border-radius(0);
+//    width: 48mm;
+//  }
+//  label {
+//    padding: {
+//      bottom: 0;
+//      top: 1mm;
+//    }
+//  }
+//}
+//.bankslip__form-item--date2 {
+//  bottom: 8mm;
+//  left: 115mm;
+//  position: absolute;
+//
+//  input,
+//  input:focus {
+//    border: {
+//      left: none;
+//      right: none;
+//      top: none;
+//    }
+//    @include border-radius(0);
+//  }
+//  label {
+//    padding: {
+//      bottom: 0;
+//      top: 1mm;
+//    }
+//  }
+//}
+//
+//.bankslip__form-number {
+//  bottom: 3.5mm;
+//  font-size: 0.8 * $font-size;
+//  left: 96mm;
+//  position: absolute;
+//}
+//.bankslip__number {
+//  -webkit-appearance: none;
+//  -moz-appearance: none;
+//  appearance: none;
+//  border: none;
+//  bottom: 3.5mm;
+//  cursor: pointer;
+//  font-size: 0.9 * $font-size;
+//  outline: none;
+//  right: 5mm;
+//  padding: 1mm 0;
+//  position: absolute;
+//  text-align: center;
+//  width: 3mm;
+//}
+//
+//@each $size in $sizes {
+//  .bankslip__field-size--#{$size} {
+//    @extend %field-size--#{$size};
+//  }
+//}
+//
+//@page {
+//  size: A4;
+//  margin: 0;
+//}
+//
+//@media print {
+//  html, body {
+//    width: 210mm;
+//    height: 297mm;
+//    margin: 0;
+//    padding: 0;
+//  }
+//}
