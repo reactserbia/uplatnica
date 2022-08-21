@@ -92,14 +92,14 @@ function App() {
 
     const onPayerChange = event => dispatch({ type: ACTIONS.PAYER_CHANGED, payload: event.target.value })
     const onPaymentDescriptionChange = event =>
-    dispatch({ type: ACTIONS.PAYMENT_DESCRIPTION, payload: event.target.value })
+        dispatch({ type: ACTIONS.PAYMENT_DESCRIPTION, payload: event.target.value })
     const onReceiverChange = event => dispatch({ type: ACTIONS.RECEIVER_CHANGED, payload: event.target.value })
     const onPayCodeChange = event => dispatch({ type: ACTIONS.PAYCODE_CHANGED, payload: event.target.value })
     const onCurrencyCode = event => dispatch({ type: ACTIONS.CURRENCY_CHANGED, payload: event.target.value })
     const onTotalAmountChange = event => dispatch({ type: ACTIONS.TOTAL_AMOUNT, payload: event.target.value })
     const onAccountReceivableChange = event =>
-    dispatch({ type: ACTIONS.ACCOUNT_RECEIVABLE, payload: event.target.value })
-    
+        dispatch({ type: ACTIONS.ACCOUNT_RECEIVABLE, payload: event.target.value })
+
     const onSetModelCodeChange = event => dispatch({ type: ACTIONS.MODEL_CODE, payload: event.target.value })
     const onPaymentNumberChange = event => dispatch({ type: ACTIONS.PAYMENT_NUMBER, payload: event.target.value })
     const resetValues = () => dispatch({ type: ACTIONS.RESET_VALUES })
