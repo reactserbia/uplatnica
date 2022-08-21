@@ -1,18 +1,18 @@
-import S from "styled-components";
+import S from 'styled-components'
 
-import Label from "./Label";
+import Label from './Label'
 
 const Textarea = ({ label, value, whenChanged }) => (
-  <Container>
-    <Label label={label} />
-    <StyledTextarea name={label} value={value} onChange={whenChanged} />
-  </Container>
-);
+    <Container>
+        <Label label={label} />
+        <StyledTextarea name={label} value={value} onChange={whenChanged} />
+    </Container>
+)
 
 const Container = S.div`
    margin-bottom: 2px;
    text-align: left;
-`;
+`
 
 const StyledTextarea = S.textarea`
     background-color: lightgrey;
@@ -25,5 +25,5 @@ const StyledTextarea = S.textarea`
     -moz-appearance: none;
     appearance: none;
     outline: none;
-`;
-export default Textarea;
+`
+export default Textarea
