@@ -1,6 +1,6 @@
 :root {
-    max-width: 1280px;
-    padding: 2rem;
+    width: 100vw;
+    height: 100vh;
     font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
     font-size: 16px;
     line-height: 24px;
@@ -13,13 +13,13 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     -webkit-text-size-adjust: 100%;
-    margin: 0 auto;
 }
 
 body {
-    width: 100vw;
+    max-width: 100vw;
     height: 100vh;
     display: flex;
-    place-items: center;
-    margin: 0;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
 }
