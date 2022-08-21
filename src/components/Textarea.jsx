@@ -16,7 +16,7 @@ const Container = S.div`
 
 const StyledTextarea = S.textarea`
     background-color: lightgrey;
-    border: solid 1px #000;
+    border: solid 1px var(--color-primary);
     font-family: Arial, Helvetica, sans-serif;
     font-size: 3.9mm;
     height: 15mm;

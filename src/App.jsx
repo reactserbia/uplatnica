@@ -184,11 +184,11 @@ const Container = styled.div`
     line-height: 1.2em;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 3mm;
-    border: solid 1px #fff;
+    border: solid 1px var(--color-primary);
     padding: 6mm;
 
     &::before {
-        border-right: solid 1px #fff;
+        border-right: solid 1px var(--color-primary);
         content: '';
         display: block;
         height: 70%;
@@ -199,7 +199,7 @@ const Container = styled.div`
 `
 
 const BankSlipTitle = styled.div`
-    color: #fff;
+    color: var(--color-primary);
     font-size: 4.95mm;
     font-weight: 600;
     text-transform: uppercase;
