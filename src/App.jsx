@@ -1,5 +1,4 @@
 import { useReducer } from 'react'
-import './App.css'
 import styled from 'styled-components'
 
 import Textarea from './components/Textarea.jsx'
@@ -32,7 +31,7 @@ const ACTIONS = {
     RESET_VALUES: 'reset-values'
 }
 
-const init = () => initialState;
+const init = () => initialState
 
 const reducer = (state, action) => {
     switch (action.type) {
@@ -89,26 +88,22 @@ const reducer = (state, action) => {
     }
 }
 
-
-
 function App() {
-
     const [state, dispatch] = useReducer(reducer, initialState, init)
-
-    const resetValues = () => dispatch({ type: ACTIONS.RESET_VALUES })
 
     const onPayerChange = event => dispatch({ type: ACTIONS.PAYER_CHANGED, payload: event.target.value })
     const onPaymentDescriptionChange = event =>
-        dispatch({ type: ACTIONS.PAYMENT_DESCRIPTION, payload: event.target.value })
+    dispatch({ type: ACTIONS.PAYMENT_DESCRIPTION, payload: event.target.value })
     const onReceiverChange = event => dispatch({ type: ACTIONS.RECEIVER_CHANGED, payload: event.target.value })
     const onPayCodeChange = event => dispatch({ type: ACTIONS.PAYCODE_CHANGED, payload: event.target.value })
     const onCurrencyCode = event => dispatch({ type: ACTIONS.CURRENCY_CHANGED, payload: event.target.value })
     const onTotalAmountChange = event => dispatch({ type: ACTIONS.TOTAL_AMOUNT, payload: event.target.value })
     const onAccountReceivableChange = event =>
-        dispatch({ type: ACTIONS.ACCOUNT_RECEIVABLE, payload: event.target.value })
-
+    dispatch({ type: ACTIONS.ACCOUNT_RECEIVABLE, payload: event.target.value })
+    
     const onSetModelCodeChange = event => dispatch({ type: ACTIONS.MODEL_CODE, payload: event.target.value })
     const onPaymentNumberChange = event => dispatch({ type: ACTIONS.PAYMENT_NUMBER, payload: event.target.value })
+    const resetValues = () => dispatch({ type: ACTIONS.RESET_VALUES })
 
     const qrModel = `K:PR|V:01|C:1|R:${state.accountReceivable}|N:${state.receiver}|I:${state.currencyCode}${state.totalAmount}|P:${state.payer}|SF:${state.payCode}|S:${state.paymentDescription}|RO:${state.modelCode}${state.paymentNumber}`
 
