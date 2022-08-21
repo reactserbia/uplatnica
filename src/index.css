@@ -13,6 +13,8 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     -webkit-text-size-adjust: 100%;
+    --color-primary: white;
+    --color-secondary: black;
 }
 
 body {
@@ -22,4 +24,13 @@ body {
     align-items: center;
     justify-content: center;
     margin: 0 auto;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+    --color-primary: black;
+    --color-secondary: white;
+  }
 }
