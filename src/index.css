@@ -27,10 +27,10 @@ body {
 }
 
 @media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-    --color-primary: black;
-    --color-secondary: white;
-  }
+    :root {
+        color: #213547;
+        background-color: #ffffff;
+        --color-primary: black;
+        --color-secondary: white;
+    }
 }
