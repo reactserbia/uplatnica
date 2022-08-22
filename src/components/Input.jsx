@@ -17,7 +17,7 @@ const Container = S.div`
 const InnerInput = S.input`
    width: calc(100% - 36px);
    background-color: lightgrey;
-   border: solid 1px #000;
+   border: solid 1px var(--color-primary);
    font-family: Arial, Helvetica, sans-serif;
    line-height: 1.34em;
    font-size: 14px;
@@ -27,8 +27,9 @@ const InnerInput = S.input`
    appearance: none;
    outline: none;
    border-width: 0.7mm;
+
    &:disabled {
-    background: gray;
+        background: gray;
    }
 `
 
