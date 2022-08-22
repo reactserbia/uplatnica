@@ -1,5 +1,6 @@
 import Label from './Label.jsx'
 import S from 'styled-components'
+import {deviceBrakepoints} from "../config/device-brakepoints.jsx";
 
 const Input = ({ disabled, width, label, value, whenChanged }) => (
     <Container width={width}>
@@ -30,7 +31,7 @@ const InnerInput = S.input`
    &:disabled {
         background: gray;
    }
-   @media (max-width: 818px) {
+   @media ${deviceBrakepoints.mobile} {
       width: calc(100% - 26px);
    }
 `

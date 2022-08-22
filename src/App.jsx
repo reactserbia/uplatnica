@@ -4,6 +4,7 @@ import { QRCodeSVG } from 'qrcode.react'
 
 import Textarea from './components/Textarea.jsx'
 import Input from './components/Input.jsx'
+import {deviceBrakepoints} from "./config/device-brakepoints.jsx";
 
 const initialState = {
     payer: '',
@@ -187,7 +188,7 @@ const Container = styled.div`
     font-size: 3mm;
     border: solid 1px var(--color-primary);
     padding: 6mm;
-    @media (min-width: 818px) {
+    @media ${deviceBrakepoints.desktop} {
         &::before {
             border-right: solid 1px var(--color-primary);
             content: '';
@@ -212,7 +213,7 @@ const LeftSide = styled.div`
     display: inline-block;
     vertical-align: top;
     width: 50%;
-    @media (max-width: 818px) {
+    @media ${deviceBrakepoints.mobile} {
         display: flex;
         flex-direction: column;
         width: 100%;
@@ -223,14 +224,14 @@ const RightSide = styled.div`
     display: inline-block;
     vertical-align: top;
     width: 50%;
-    @media (max-width: 818px) {
+    @media ${deviceBrakepoints.mobile} {
         display: flex;
         flex-direction: column;
         width: 100%;
     }
 `
 const QRcodeSVGConainer = styled.div`
-    @media (max-width: 818px) {
+    @media ${deviceBrakepoints.mobile} {
         margin: 5px auto;
     }
 `
