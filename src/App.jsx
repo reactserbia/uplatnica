@@ -137,8 +137,9 @@ function App() {
                     value={state.paymentNumber}
                     whenChanged={onPaymentNumberChange}
                 />
-
-                <QRCodeSVG value={qrModel} />
+                <QRcodeSVGConainer>
+                    <QRCodeSVG value={qrModel} />
+                </QRcodeSVGConainer>
             </RightSide>
             <button onClick={resetValues}>Očisti vrednosti</button>
         </Container>
@@ -186,15 +187,16 @@ const Container = styled.div`
     font-size: 3mm;
     border: solid 1px var(--color-primary);
     padding: 6mm;
-
-    &::before {
-        border-right: solid 1px var(--color-primary);
-        content: '';
-        display: block;
-        height: 70%;
-        left: 47.7%;
-        position: absolute;
-        top: 10%;
+    @media (min-width: 818px) {
+        &::before {
+            border-right: solid 1px var(--color-primary);
+            content: '';
+            display: block;
+            height: 70%;
+            left: 47.7%;
+            position: absolute;
+            top: 10%;
+        }
     }
 `
 
@@ -210,12 +212,27 @@ const LeftSide = styled.div`
     display: inline-block;
     vertical-align: top;
     width: 50%;
+    @media (max-width: 818px) {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
 `
 
 const RightSide = styled.div`
     display: inline-block;
     vertical-align: top;
     width: 50%;
+    @media (max-width: 818px) {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+`
+const QRcodeSVGConainer = styled.div`
+    @media (max-width: 818px) {
+        margin: 5px auto;
+    }
 `
 
 export default App

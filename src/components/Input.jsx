@@ -27,9 +27,11 @@ const InnerInput = S.input`
    appearance: none;
    outline: none;
    border-width: 0.7mm;
-
    &:disabled {
         background: gray;
+   }
+   @media (max-width: 818px) {
+      width: calc(100% - 26px);
    }
 `
 
