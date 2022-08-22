@@ -120,15 +120,15 @@ function App() {
                 <Textarea label='Primalac' value={state.receiver} whenChanged={onReceiverChange} />
             </LeftSide>
             <RightSide>
-                <Input width={17} label='Sifra Pacanja' value={state.payCode} whenChanged={onPayCodeChange} />
+                <Input width={23} label='Sifra Pacanja' value={state.payCode} whenChanged={onPayCodeChange} />
                 <Input
-                    width={17}
+                    width={23}
                     disabled={true}
                     label='Valuta'
                     value={state.currencyCode}
                     whenChanged={onCurrencyCode}
                 />
-                <Input width={66} label='Iznos' value={state.totalAmount} whenChanged={onTotalAmountChange} />
+                <Input width={54} label='Iznos' value={state.totalAmount} whenChanged={onTotalAmountChange} />
                 <Input label='Racun Primaoca' value={state.accountReceivable} whenChanged={onAccountReceivableChange} />
                 <Input width={25} label='Model' value={state.modelCode} whenChanged={onSetModelCodeChange} />
                 <Input
