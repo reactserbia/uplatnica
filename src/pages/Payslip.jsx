@@ -121,7 +121,7 @@ function Payslip() {
                 <Textarea label='Primalac' value={state.receiver} whenChanged={onReceiverChange} />
             </LeftSide>
             <RightSide>
-                <Input width={23} label='Sifra Pacanja' value={state.payCode} whenChanged={onPayCodeChange} />
+                <Input type='number' width={23} label='Sifra Pacanja' value={state.payCode} whenChanged={onPayCodeChange} />
                 <Input
                     width={23}
                     disabled={true}
@@ -129,11 +129,15 @@ function Payslip() {
                     value={state.currencyCode}
                     whenChanged={onCurrencyCode}
                 />
-                <Input width={54} label='Iznos' value={state.totalAmount} whenChanged={onTotalAmountChange} />
-                <Input label='Racun Primaoca' value={state.accountReceivable} whenChanged={onAccountReceivableChange} />
-                <Input width={25} label='Model' value={state.modelCode} whenChanged={onSetModelCodeChange} />
                 <Input
-                    width={75}
+                    type='number' width={54} label='Iznos' value={state.totalAmount} whenChanged={onTotalAmountChange} />
+                <Input
+                    type='number' label='Racun Primaoca' value={state.accountReceivable} whenChanged={onAccountReceivableChange} />
+                <Input
+                    type='number' width={25} label='Model' value={state.modelCode} whenChanged={onSetModelCodeChange} />
+                <Input
+
+                    type='number' width={75}
                     label='Poziv na broj'
                     value={state.paymentNumber}
                     whenChanged={onPaymentNumberChange}
