@@ -107,7 +107,6 @@ function Payslip() {
     const resetValues = () => dispatch({ type: ACTIONS.RESET_VALUES })
 
     let qrModel = createQrModel(state);
-    console.log(qrModel);
 
     return (
         <Container>
@@ -140,7 +139,7 @@ function Payslip() {
                     whenChanged={onPaymentNumberChange}
                 />
                 <QRcodeSVGConainer>
-                    <QRCodeSVG value={qrModel} />
+                    <QRCodeSVG size={150} value={qrModel} />
                 </QRcodeSVGConainer>
             </RightSide>
             <button onClick={resetValues}>Očisti vrednosti</button>
