@@ -1,10 +1,11 @@
-import { useReducer } from 'react'
 import styled, { createGlobalStyle } from 'styled-components'
-import { QRCodeSVG } from 'qrcode.react'
 
-import Textarea from './components/Textarea.jsx'
 import Input from './components/Input.jsx'
+import { QRCodeSVG } from 'qrcode.react'
+import Textarea from './components/Textarea.jsx'
+import {createQrModel} from './utils/qrModelUtils';
 import {deviceBrakepoints} from "./config/device-brakepoints.jsx";
+import { useReducer } from 'react'
 
 const initialState = {
     payer: '',
@@ -105,8 +106,7 @@ function App() {
     const onPaymentNumberChange = event => dispatch({ type: ACTIONS.PAYMENT_NUMBER, payload: event.target.value })
     const resetValues = () => dispatch({ type: ACTIONS.RESET_VALUES })
 
-    const qrModel = `K:PR|V:01|C:1|R:${state.accountReceivable}|N:${state.receiver}|I:${state.currencyCode}${state.totalAmount}|P:${state.payer}|SF:${state.payCode}|S:${state.paymentDescription}|RO:${state.modelCode}${state.paymentNumber}`
-
+    let qrModel = createQrModel(state);
     return (
         <Container>
             <GlobalStyles />
