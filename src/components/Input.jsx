@@ -1,8 +1,8 @@
 import Label from './Label.jsx'
 import S from 'styled-components'
-import {deviceBrakepoints} from "../config/device-brakepoints.jsx";
+import { deviceBrakepoints } from '@config/device-brakepoints.jsx'
 
-const Input = ({ type ='text', disabled, width, label, value, whenChanged }) => (
+const Input = ({ type = 'text', disabled, width, label, value, whenChanged }) => (
     <Container width={width}>
         <Label label={label} />
         <InnerInput type={type} disabled={disabled} value={value} onChange={whenChanged} />
