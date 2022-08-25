@@ -1,5 +1,5 @@
-import {Route, Routes } from "react-router-dom";
-import Payslip from "./pages/Payslip.jsx";
+import { Route, Routes } from 'react-router-dom'
+import Payslip from './pages/Payslip.jsx'
 import styled, { createGlobalStyle } from 'styled-components'
 
 function App() {
@@ -7,9 +7,7 @@ function App() {
         <Container>
             <GlobalStyles />
             <Routes>
-                <Route path="/" element={<Payslip />} >
-                    <Route path="invoiceId" element={<Payslip />} />
-                </Route>
+                <Route path='/' element={<Payslip />} />
             </Routes>
         </Container>
     )
@@ -47,7 +45,6 @@ const GlobalStyles = createGlobalStyle`
     }
 `
 
-const Container = styled.div`
-`
+const Container = styled.div``
 
 export default App
