@@ -1,10 +1,10 @@
 import styled from 'styled-components'
 
-import Input from '../components/Input.jsx'
+import Input from '@components/Input.jsx'
 import { QRCodeSVG } from 'qrcode.react'
-import Textarea from '../components/Textarea.jsx'
-import { createQrModel } from '../utils/qrModelUtils'
-import { deviceBrakepoints } from '../config/device-brakepoints.jsx'
+import Textarea from '@components/Textarea.jsx'
+import { createQrModel } from '@utils/qrModelUtils'
+import { deviceBrakepoints } from '@config/device-brakepoints.jsx'
 import { useReducer } from 'react'
 import { useLocation } from 'react-router-dom'
 

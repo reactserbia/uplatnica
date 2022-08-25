@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom'
-import Payslip from './pages/Payslip.jsx'
+import Payslip from '@pages/Payslip.jsx'
 import styled, { createGlobalStyle } from 'styled-components'
 
 function App() {
