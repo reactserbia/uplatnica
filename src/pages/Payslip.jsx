@@ -3,9 +3,10 @@ import styled from 'styled-components'
 import Input from '../components/Input.jsx'
 import { QRCodeSVG } from 'qrcode.react'
 import Textarea from '../components/Textarea.jsx'
-import {createQrModel} from '../utils/qrModelUtils';
-import {deviceBrakepoints} from "../config/device-brakepoints.jsx";
+import { createQrModel } from '../utils/qrModelUtils'
+import { deviceBrakepoints } from '../config/device-brakepoints.jsx'
 import { useReducer } from 'react'
+import { useLocation } from 'react-router-dom'
 
 const initialState = {
     payer: '',
@@ -106,7 +107,17 @@ function Payslip() {
     const onPaymentNumberChange = event => dispatch({ type: ACTIONS.PAYMENT_NUMBER, payload: event.target.value })
     const resetValues = () => dispatch({ type: ACTIONS.RESET_VALUES })
 
-    let qrModel = createQrModel(state);
+    let qrModel = createQrModel(state)
+
+    const params = new URLSearchParams(useLocation().search)
+
+    const accountNumber = params.get('account-number')
+    const amount = params.get('amount')
+
+    console.table({
+        accountNumber,
+        amount
+    })
 
     return (
         <Container>
@@ -121,7 +132,13 @@ function Payslip() {
                 <Textarea label='Primalac' value={state.receiver} whenChanged={onReceiverChange} />
             </LeftSide>
             <RightSide>
-                <Input type='number' width={23} label='Sifra Pacanja' value={state.payCode} whenChanged={onPayCodeChange} />
+                <Input
+                    type='number'
+                    width={23}
+                    label='Sifra Pacanja'
+                    value={state.payCode}
+                    whenChanged={onPayCodeChange}
+                />
                 <Input
                     width={23}
                     disabled={true}
@@ -130,14 +147,28 @@ function Payslip() {
                     whenChanged={onCurrencyCode}
                 />
                 <Input
-                    type='number' width={54} label='Iznos' value={state.totalAmount} whenChanged={onTotalAmountChange} />
+                    type='number'
+                    width={54}
+                    label='Iznos'
+                    value={state.totalAmount}
+                    whenChanged={onTotalAmountChange}
+                />
                 <Input
-                    type='number' label='Racun Primaoca' value={state.accountReceivable} whenChanged={onAccountReceivableChange} />
+                    type='number'
+                    label='Racun Primaoca'
+                    value={state.accountReceivable}
+                    whenChanged={onAccountReceivableChange}
+                />
                 <Input
-                    type='number' width={25} label='Model' value={state.modelCode} whenChanged={onSetModelCodeChange} />
+                    type='number'
+                    width={25}
+                    label='Model'
+                    value={state.modelCode}
+                    whenChanged={onSetModelCodeChange}
+                />
                 <Input
-
-                    type='number' width={75}
+                    type='number'
+                    width={75}
                     label='Poziv na broj'
                     value={state.paymentNumber}
                     whenChanged={onPaymentNumberChange}
