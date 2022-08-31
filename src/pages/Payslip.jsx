@@ -76,7 +76,7 @@ const reducer = (state, action) => {
         case ACTIONS.MODEL_CODE:
             return {
                 ...state,
-                modelCode: action.payload
+                modelCode: action
             }
         case ACTIONS.PAYMENT_NUMBER:
             return {
@@ -103,8 +103,7 @@ function Payslip() {
     const onTotalAmountChange = event => dispatch({ type: ACTIONS.TOTAL_AMOUNT, payload: event.target.value })
     const onAccountReceivableChange = event =>
         dispatch({ type: ACTIONS.ACCOUNT_RECEIVABLE, payload: event.target.value })
-
-    const onSetModelCodeChange = event => dispatch({ type: ACTIONS.MODEL_CODE, payload: event.target.value })
+    const onSetModelCodeChange = event => {dispatch({ type: ACTIONS.MODEL_CODE, payload: event });}
     const onPaymentNumberChange = event => dispatch({ type: ACTIONS.PAYMENT_NUMBER, payload: event.target.value })
     const resetValues = () => dispatch({ type: ACTIONS.RESET_VALUES })
 
@@ -160,18 +159,11 @@ function Payslip() {
                     value={state.accountReceivable}
                     whenChanged={onAccountReceivableChange}
                 />
-                {/*<Input*/}
-                {/*    type='number'*/}
-                {/*    width={25}*/}
-                {/*    label='Model'*/}
-                {/*    value={state.modelCode}*/}
-                {/*    whenChanged={onSetModelCodeChange}*/}
-                {/*/>*/}
                 <Modelselect
                   width={25}
                   label='Model'
                   value={state.paymentNumber}
-                  whenChanged={onPaymentNumberChange}></Modelselect>
+                  whenChanged={onSetModelCodeChange} />
                 <Input
                     type='number'
                     width={75}

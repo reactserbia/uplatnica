@@ -9,15 +9,14 @@ const options = [
 ]
 
 const ModelselectStyles = {
-  indicatorsContainer: styles => ({
-    ...styles,
-  }),
   control: styles => ({
     ...styles,
     borderRadius: '0',
     backgroundColor: 'lightgrey',
     borderColor: 'white',
     borderWidth: '3px',
+    boxShadow: 'none',
+    top: '-1px',
   }),
   menuList: styles => ({
     ...styles,
@@ -30,40 +29,45 @@ const ModelselectStyles = {
       ? 'gray'
       : isSelected
         ? 'lightgrey'
-        : undefined,
+        : 'undefined',
     zIndex: 1
-  }),
-  menu: base => ({
-    ...base,
-    zIndex: 100
   })
 }
 
 const theme = (theme) => ({
   ...theme,
+  colors: {
+    ...theme.colors,
+    primary: 'gray',
+    primary75: 'gray',
+    primary50: 'gray',
+    primary25: 'gray'
+  },
   spacing: {
     ...theme.spacing,
-    controlHeight: 16,
-    baseUnit: 0.6,
+    controlHeight: 14,
+    baseUnit: 0.55,
   }
 });
 
-const Modelselect = ({ type = 'text', disabled, width, label, value, whenChanged }) => (
-  <Container width={width}>
+const Modelselect = ({ type = 'text', width, label, value, whenChanged }) => {
+  const handleChange = value => {
+    whenChanged = value.value
+  };
+
+  return <Container width={width}>
     <Label label={label} />
     <Select options={options}
             placeholder={'Izaberi'}
-styles={ModelselectStyles}
+            name={label}
+            styles={ModelselectStyles}
             theme={theme}
-            // onInputChange={}
-            // onMenuClose={}
-            // inputValue={}
-            // onMenuOpen={}
-            onChange={whenChanged}
-            value={value}/>
-    {/*<InnerInput type={type} disabled={disabled} value={value} onChange={whenChanged} />*/}
+            defaultValue={value}
+            value={value.value}
+            onChange={handleChange}
+            />
   </Container>
-)
+}
 
 const Container = S.div`
    display: inline-block;
@@ -72,5 +76,6 @@ const Container = S.div`
    padding-right: 10px;
    width: ${props => (props.width ? props.width : '100')}%;  
 `
+
 
 export default Modelselect
