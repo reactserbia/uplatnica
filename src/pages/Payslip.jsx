@@ -7,6 +7,7 @@ import { createQrModel } from '@utils/qrModelUtils'
 import { deviceBrakepoints } from '@config/device-brakepoints.jsx'
 import { useReducer } from 'react'
 import { useLocation } from 'react-router-dom'
+import Modelselect from "../components/Modelselect.jsx";
 
 const initialState = {
     payer: '',
@@ -159,13 +160,18 @@ function Payslip() {
                     value={state.accountReceivable}
                     whenChanged={onAccountReceivableChange}
                 />
-                <Input
-                    type='number'
-                    width={25}
-                    label='Model'
-                    value={state.modelCode}
-                    whenChanged={onSetModelCodeChange}
-                />
+                {/*<Input*/}
+                {/*    type='number'*/}
+                {/*    width={25}*/}
+                {/*    label='Model'*/}
+                {/*    value={state.modelCode}*/}
+                {/*    whenChanged={onSetModelCodeChange}*/}
+                {/*/>*/}
+                <Modelselect
+                  width={25}
+                  label='Model'
+                  value={state.paymentNumber}
+                  whenChanged={onPaymentNumberChange}></Modelselect>
                 <Input
                     type='number'
                     width={75}
