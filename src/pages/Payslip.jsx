@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import styled from 'styled-components'
 
 import Input from '@components/Input.jsx'
@@ -7,7 +8,13 @@ import { createQrModel } from '@utils/qrModelUtils'
 import { deviceBrakepoints } from '@config/device-brakepoints.jsx'
 import { useReducer } from 'react'
 import { useLocation } from 'react-router-dom'
-import Modelselect from "../components/Modelselect.jsx";
+import Modelselect from '../components/Modelselect.jsx'
+
+export const options = [
+    { value: '97', label: '97' },
+    { value: '11', label: '11' },
+    { value: '00', label: '00' }
+]
 
 const initialState = {
     payer: '',
@@ -17,7 +24,7 @@ const initialState = {
     currencyCode: 'RSD',
     totalAmount: '',
     accountReceivable: '',
-    modelCode: '',
+    modelCode: options[1],
     paymentNumber: ''
 }
 
@@ -76,7 +83,7 @@ const reducer = (state, action) => {
         case ACTIONS.MODEL_CODE:
             return {
                 ...state,
-                modelCode: action
+                modelCode: action.payload
             }
         case ACTIONS.PAYMENT_NUMBER:
             return {
@@ -93,6 +100,7 @@ const reducer = (state, action) => {
 
 function Payslip() {
     const [state, dispatch] = useReducer(reducer, initialState, init)
+    const params = new URLSearchParams(useLocation().search)
 
     const onPayerChange = event => dispatch({ type: ACTIONS.PAYER_CHANGED, payload: event.target.value })
     const onPaymentDescriptionChange = event =>
@@ -103,21 +111,35 @@ function Payslip() {
     const onTotalAmountChange = event => dispatch({ type: ACTIONS.TOTAL_AMOUNT, payload: event.target.value })
     const onAccountReceivableChange = event =>
         dispatch({ type: ACTIONS.ACCOUNT_RECEIVABLE, payload: event.target.value })
-    const onSetModelCodeChange = event => {dispatch({ type: ACTIONS.MODEL_CODE, payload: event });}
+    const onSetModelCodeChange = event => {
+        console.log(event)
+        dispatch({ type: ACTIONS.MODEL_CODE, payload: event })
+    }
     const onPaymentNumberChange = event => dispatch({ type: ACTIONS.PAYMENT_NUMBER, payload: event.target.value })
     const resetValues = () => dispatch({ type: ACTIONS.RESET_VALUES })
 
     let qrModel = createQrModel(state)
+    useEffect(() => {
+        const accountNumber = params.get('account-number')
+        const amount = params.get('amount')
+        const modelCode = params.get('modelCode')
 
-    const params = new URLSearchParams(useLocation().search)
+        if (modelCode) {
+            for (let i = 0; i < options.length; i++) {
+                if (options[i].value === modelCode) {
+                    onSetModelCodeChange(options[i])
+                    console.log('ARE EQUAL')
+                    break
+                }
+            }
+        }
 
-    const accountNumber = params.get('account-number')
-    const amount = params.get('amount')
-
-    console.table({
-        accountNumber,
-        amount
-    })
+        console.table({
+            accountNumber,
+            amount,
+            modelCode
+        })
+    }, [])
 
     return (
         <Container>
@@ -160,10 +182,12 @@ function Payslip() {
                     whenChanged={onAccountReceivableChange}
                 />
                 <Modelselect
-                  width={25}
-                  label='Model'
-                  value={state.paymentNumber}
-                  whenChanged={onSetModelCodeChange} />
+                    width={25}
+                    label='Model'
+                    value={state.modelCode}
+                    options={options}
+                    whenChanged={onSetModelCodeChange}
+                />
                 <Input
                     type='number'
                     width={75}
