@@ -12,6 +12,10 @@ const ModelselectStyles = {
         boxShadow: 'none',
         top: '-1px'
     }),
+    menu: styles => ({
+        ...styles,
+        white: '200px'
+    }),
     menuList: styles => ({
         ...styles,
         background: 'white',
@@ -40,7 +44,7 @@ const theme = theme => ({
     }
 })
 
-const Modelselect = ({ width, label, value, whenChanged, options }) => (
+const Modelselect = ({ width, large, label, value, whenChanged, options }) => (
     <Container width={width}>
         <Label label={label} />
         <Select

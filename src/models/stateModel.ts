@@ -4,8 +4,8 @@ export interface IState {
     currencyCode:string;
     totalAmount:string;
     payer:string;
-    payCode:string;
+    payCode:any;
     paymentDescription:string;
-    modelCode:string;
+    modelCode:any;
     paymentNumber:string
 }

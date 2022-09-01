@@ -1,6 +1,6 @@
 # Uplatnica
 
-Uplatnica is project for Serbian PaySlip, vision is to create easiest way to generate Serbian payslip and NBS QR code. 
+Uplatnica is project for Serbian PaySlip, vision is to create easiest way to generate Serbian payslip and NBS QR code.
 
 # Development
 
@@ -10,7 +10,7 @@ Clone
 
 ```bash
 git clone https://github.com/itmilos/uplatnica.git
-cd uplatnica  
+cd uplatnica
 ```
 
 Install dependencies
