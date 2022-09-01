@@ -9,8 +9,8 @@ export function createQrModel(state: IState) {
         N:${state.receiver}|
         I:${state.currencyCode}${state.totalAmount},|
         P:${state.payer}|
-        SF:${state.payCode}|
+        SF:${state.payCode.value}|
         S:${state.paymentDescription}|
-        RO:${state.modelCode}${state.paymentNumber}
+        RO:${state.modelCode.value}${state.paymentNumber}
     `
 }
