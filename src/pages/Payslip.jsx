@@ -1021,7 +1021,7 @@ function Payslip() {
                     <QRCodeSVG size={150} value={qrModel} />
                 </QRcodeSVGConainer>
             </RightSide>
-            //TODO: Create button component
+            {/*TODO: Create button component*/}
             <button onClick={resetValues} aria-describedby="cleanButtonHelp">Očisti vrednosti</button>
             <div hidden id="cleanButtonHelp">
                 Ovo dugme vraća sve na početne vrednosti.
