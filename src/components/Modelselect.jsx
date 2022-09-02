@@ -44,11 +44,13 @@ const theme = theme => ({
     }
 })
 
-const Modelselect = ({ width, large, label, value, whenChanged, options }) => (
+const Modelselect = ({ width, placeholder, helpId, helpText, label, value, whenChanged, options }) => (
     <Container width={width}>
         <Label label={label} />
         <Select
-            placeholder='Izaberi'
+            placeholder={placeholder}
+            aria-label={placeholder}
+            aria-labelledby={helpId}
             options={options}
             styles={ModelselectStyles}
             theme={theme}
@@ -56,6 +58,7 @@ const Modelselect = ({ width, large, label, value, whenChanged, options }) => (
             value={value}
             onChange={whenChanged}
         />
+        <span hidden id={helpId}>{helpText}</span>
     </Container>
 )
 

@@ -940,18 +940,32 @@ function Payslip() {
         <Container>
             <BankSlipTitle>Nalog Za Uplatu</BankSlipTitle>
             <LeftSide>
-                <Textarea label='Platilac' value={state.payer} whenChanged={onPayerChange} />
+                <Textarea label='Platilac'
+                          id='payer'
+                          help='payerHelp'
+                          helpText='U ovo polje upišite podatke osobe koja je Platilac.'
+                          value={state.payer} whenChanged={onPayerChange} />
                 <Textarea
                     label='Svrha uplate'
+                    id='paymentDescription'
+                    help='paymentDescriptionHelp'
+                    helpText='U ovo polje upišite svrhu uplate.'
                     value={state.paymentDescription}
                     whenChanged={onPaymentDescriptionChange}
                 />
-                <Textarea label='Primalac' value={state.receiver} whenChanged={onReceiverChange} />
+                <Textarea label='Primalac'
+                          id='receiverDescription'
+                          help='receiverDescriptionHelp'
+                          helpText='U ovo polje upišite podatke osobe koja je Primalac.'
+                          value={state.receiver} whenChanged={onReceiverChange} />
             </LeftSide>
             <RightSide>
                 <Modelselect
                     width={23}
                     label='Sifra Pacanja'
+                    placeholder='Izaberi'
+                    helpId='payCodeOptionsHelp'
+                    helpText='Selektujte šifru uplate.'
                     value={state.payCode}
                     options={PayCodeOptions}
                     whenChanged={onPayCodeChange}
@@ -960,6 +974,9 @@ function Payslip() {
                     width={23}
                     disabled={true}
                     label='Valuta'
+                    id='valuta'
+                    help='valutaHelp'
+                    helpText='Ovo polje je onemogućeno jer valuta mora biti RSD.'
                     value={state.currencyCode}
                     whenChanged={onCurrencyCode}
                 />
@@ -967,6 +984,9 @@ function Payslip() {
                     type='number'
                     width={54}
                     label='Iznos'
+                    id='totalAmount'
+                    help='totalAmountHelp'
+                    helpText='Ovde upišite brojevima ukupan iznos koji zelite da uplatite.'
                     value={state.totalAmount}
                     whenChanged={onTotalAmountChange}
                 />
@@ -979,6 +999,9 @@ function Payslip() {
                 <Modelselect
                     width={25}
                     label='Model'
+                    placeholder='Izaberi'
+                    helpId='modelCodeHelp'
+                    helpText='Selektujte model uplate.'
                     large={true}
                     value={state.modelCode}
                     options={ModelCodeOptions}
@@ -988,6 +1011,9 @@ function Payslip() {
                     type='number'
                     width={75}
                     label='Poziv na broj'
+                    id='paymentNumber'
+                    help='paymentNumberHelp'
+                    helpText='Ovde upišite brojevima poziv na broj za ovu uplatnicu.'
                     value={state.paymentNumber}
                     whenChanged={onPaymentNumberChange}
                 />
@@ -995,7 +1021,12 @@ function Payslip() {
                     <QRCodeSVG size={150} value={qrModel} />
                 </QRcodeSVGConainer>
             </RightSide>
-            <button onClick={resetValues}>Očisti vrednosti</button>
+            //TODO: Create button component
+            <button onClick={resetValues} aria-describedby="cleanButtonHelp">Očisti vrednosti</button>
+            <div hidden id="cleanButtonHelp">
+                Ovo dugme vraća sve na početne vrednosti.
+            </div>
+
         </Container>
     )
 }
