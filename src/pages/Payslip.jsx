@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import styled from 'styled-components'
 
 import Input from '@components/Input.jsx'
+import SplittedInput from '@components/SplittedInput.jsx'
 import { QRCodeSVG } from 'qrcode.react'
 import Textarea from '@components/Textarea.jsx'
 import { createQrModel } from '@utils/qrModelUtils'
@@ -823,6 +824,9 @@ const initialState = {
     payCode: PayCodeOptions[1],
     currencyCode: 'RSD',
     totalAmount: '',
+    bankNumber: '',
+    accountNumber: '',
+    controlNumber: '',
     accountReceivable: '',
     modelCode: ModelCodeOptions[1],
     paymentNumber: ''
@@ -835,7 +839,9 @@ const ACTIONS = {
     PAYCODE_CHANGED: 'pay-code-change',
     CURRENCY_CHANGED: 'currency-change',
     TOTAL_AMOUNT: 'total-amount-change',
-    ACCOUNT_RECEIVABLE: 'account-available-change',
+    BANK_NUMBER_CHANGE: 'bank-number-change',
+    ACCOUNT_NUMBER_CHANGE: 'account-number-change',
+    CONTROL_NUMBER_CHANGE: 'control-number-change',
     MODEL_CODE: 'model-code-change',
     PAYMENT_NUMBER: 'payment-number-change',
     RESET_VALUES: 'reset-values'
@@ -875,10 +881,23 @@ const reducer = (state, action) => {
                 ...state,
                 totalAmount: action.payload
             }
-        case ACTIONS.ACCOUNT_RECEIVABLE:
+        case ACTIONS.BANK_NUMBER_CHANGE:
             return {
                 ...state,
-                accountReceivable: action.payload
+                bankNumber: action.payload,
+                accountReceivable: state.bankNumber + state.accountNumber + state.controlNumber
+            }
+        case ACTIONS.ACCOUNT_NUMBER_CHANGE:
+            return {
+                ...state,
+                accountNumber: action.payload,
+                accountReceivable: state.bankNumber + state.accountNumber + state.controlNumber
+            }
+        case ACTIONS.CONTROL_NUMBER_CHANGE:
+            return {
+                ...state,
+                controlNumber: action.payload,
+                accountReceivable: state.bankNumber + state.accountNumber + state.controlNumber
             }
         case ACTIONS.MODEL_CODE:
             return {
@@ -908,8 +927,29 @@ function Payslip() {
     const onPayCodeChange = event => dispatch({ type: ACTIONS.PAYCODE_CHANGED, payload: event })
     const onCurrencyCode = event => dispatch({ type: ACTIONS.CURRENCY_CHANGED, payload: event.target.value })
     const onTotalAmountChange = event => dispatch({ type: ACTIONS.TOTAL_AMOUNT, payload: event.target.value })
+
+    const appendZeros = value => {
+        let newValue = value
+        while (newValue.length < 13) newValue = '0' + newValue
+        dispatch({ type: ACTIONS.ACCOUNT_NUMBER_CHANGE, payload: newValue })
+    }
+    const onFixBankNumberChange = event => {
+        if (/^[1-9]{0,1}[0-9]{0,2}$/.test(event.target.value))
+            dispatch({ type: ACTIONS.BANK_NUMBER_CHANGE, payload: event.target.value })
+    }
+    const onAccountNumberChange = event => {
+        if (/^[0-9]{0,13}$/.test(event.target.value)) {
+            dispatch({ type: ACTIONS.ACCOUNT_NUMBER_CHANGE, payload: event.target.value })
+        }
+    }
+    const onControlNumberChange = event => {
+        if (/^[1-9]{0,1}[0-9]{0,1}$/.test(event.target.value))
+            dispatch({ type: ACTIONS.CONTROL_NUMBER_CHANGE, payload: event.target.value })
+    }
+
+
     const onAccountReceivableChange = event => dispatch({ type: ACTIONS.ACCOUNT_RECEIVABLE, payload: event.target.value })
-    const onSetModelCodeChange = event => {dispatch({ type: ACTIONS.MODEL_CODE, payload: event })}
+    const onSetModelCodeChange = event => dispatch({ type: ACTIONS.MODEL_CODE, payload: event })
     const onPaymentNumberChange = event => dispatch({ type: ACTIONS.PAYMENT_NUMBER, payload: event.target.value })
     const resetValues = () => dispatch({ type: ACTIONS.RESET_VALUES })
 
@@ -970,11 +1010,41 @@ function Payslip() {
                     value={state.totalAmount}
                     whenChanged={onTotalAmountChange}
                 />
-                <Input
-                    type='number'
-                    label='Racun Primaoca'
-                    value={state.accountReceivable}
-                    whenChanged={onAccountReceivableChange}
+                <SplittedInput
+                    legend='Broj Racuna'
+                    inputs={[
+                        {
+                            type: 'text',
+                            width: 23,
+                            value: state.bankNumber,
+                            pattern: '^[1-9]{1}[0-9]{2}$',
+                            required: true,
+                            errorMessage: 'Mora biti trocifren broj',
+                            ariaLabel: 'Prve tri cifre',
+                            whenChanged: onFixBankNumberChange
+                        },
+                        {
+                            type: 'text',
+                            width: 49,
+                            value: state.accountNumber,
+                            pattern: '^[0-9]{13}$',
+                            required: true,
+                            errorMessage: 'Mora biti trinaestocifreni broj',
+                            ariaLabel: 'Narednih trinaest cifara',
+                            whenChanged: onAccountNumberChange,
+                            appendZeros: appendZeros
+                        },
+                        {
+                            type: 'text',
+                            width: 21,
+                            value: state.controlNumber,
+                            pattern: '^[1-9]{1}[0-9]{1}$',
+                            required: true,
+                            errorMessage: 'Mora biti dvocifren broj',
+                            ariaLabel: 'Zadnje dve cifre',
+                            whenChanged: onControlNumberChange
+                        }
+                    ]}
                 />
                 <Modelselect
                     width={25}
