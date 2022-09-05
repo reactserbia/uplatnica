@@ -949,7 +949,7 @@ function Payslip() {
 
 
     const onAccountReceivableChange = event => dispatch({ type: ACTIONS.ACCOUNT_RECEIVABLE, payload: event.target.value })
-    const onSetModelCodeChange = event => dispatch({ type: ACTIONS.MODEL_CODE, payload: event.target.value })
+    const onSetModelCodeChange = event => dispatch({ type: ACTIONS.MODEL_CODE, payload: event })
     const onPaymentNumberChange = event => dispatch({ type: ACTIONS.PAYMENT_NUMBER, payload: event.target.value })
     const resetValues = () => dispatch({ type: ACTIONS.RESET_VALUES })
 
