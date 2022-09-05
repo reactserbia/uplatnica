@@ -26,5 +26,9 @@ const StyledTextarea = S.textarea`
     -moz-appearance: none;
     appearance: none;
     outline: none;
+    &:focus {
+      border: solid 1px orange;
+      box-shadow: 0 0 2px 2px orange;
+    }
 `
 export default Textarea
