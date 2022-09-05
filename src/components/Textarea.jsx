@@ -2,10 +2,11 @@ import S from 'styled-components'
 
 import Label from './Label'
 
-const Textarea = ({ label, value, whenChanged }) => (
+const Textarea = ({ label, id, help, helpText, value, whenChanged }) => (
     <Container>
-        <Label label={label} />
-        <StyledTextarea name={label} value={value} onChange={whenChanged} />
+        <Label label={label} for={id}/>
+        <StyledTextarea name={id} id={id} aria-describedby={help} value={value} onChange={whenChanged} />
+        <span hidden id={help}>{helpText}</span>
     </Container>
 )
 

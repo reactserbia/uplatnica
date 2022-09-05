@@ -2,10 +2,11 @@ import Label from './Label.jsx'
 import S from 'styled-components'
 import { deviceBrakepoints } from '@config/device-brakepoints.jsx'
 
-const Input = ({ type = 'text', disabled, width, label, value, whenChanged }) => (
-    <Container width={width}>
-        <Label label={label} />
-        <InnerInput type={type} disabled={disabled} value={value} onChange={whenChanged} />
+const Input = ({ type = 'text', id, help, helpText, disabled, width, label, value, whenChanged }) => (
+    <Container width={width} >
+        <Label label={label} for={id}/>
+        <InnerInput type={type} name={id} id={id} aria-describedby={help} disabled={disabled} value={value} onChange={whenChanged} />
+        <span hidden id={help}>{helpText}</span>
     </Container>
 )
 
