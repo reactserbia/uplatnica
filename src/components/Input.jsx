@@ -32,6 +32,10 @@ const InnerInput = S.input`
    &:disabled {
         background: gray;
    }
+   &:focus {
+      border: solid 1px orange;
+      box-shadow: 0 0 2px 2px orange;
+   }
    @media ${deviceBrakepoints.mobile} {
       width: calc(100% - 26px);
    }
