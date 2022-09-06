@@ -36,8 +36,6 @@ If you encounter an issue, you can [create a ticket](https://github.com/itmilos/
 
 #TODO: WIP
 
-## Similar Projects
-
 ## <a name="7"></a>7. Similar Projects
 
 [UplatiTo](https://uplati.to/) - Share serbian bank account via link
