@@ -22,7 +22,7 @@
     },
     "devDependencies": {
         "@types/react": "^18.0.18",
-        "@vitejs/plugin-react": "^2.0.1",
+        "@vitejs/plugin-react": "^2.1.0",
         "compass-mixins": "^0.12.12",
         "eslint": "^8.23.0",
         "eslint-config-prettier": "^8.5.0",
