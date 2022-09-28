@@ -41,3 +41,5 @@ If you encounter an issue, you can [create a ticket](https://github.com/itmilos/
 [UplatiTo](https://uplati.to/) - Share serbian bank account via link
 
 [Uplatnica.rs](https://uplatnica.rs/) - Generate Serbian payslip online 
+
+[Plati Mi](https://www.platimi.rs/) - Generate Serbian payslip on mobile device
