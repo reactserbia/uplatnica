@@ -24,7 +24,7 @@
         "@types/react": "^18.0.18",
         "@vitejs/plugin-react": "^2.1.0",
         "compass-mixins": "^0.12.12",
-        "eslint": "^8.23.0",
+        "eslint": "^8.26.0",
         "eslint-config-prettier": "^8.5.0",
         "eslint-plugin-react": "^7.31.7",
         "prettier": "2.7.1",
