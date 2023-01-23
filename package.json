@@ -16,7 +16,7 @@
         "react-dom": "^18.2.0",
         "react-favicon": "^1.0.1",
         "react-is": "^18.2.0",
-        "react-router-dom": "^6.3.0",
+        "react-router-dom": "^6.7.0",
         "react-select": "^5.4.0",
         "styled-components": "^5.3.5"
     },
