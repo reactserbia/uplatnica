@@ -26,7 +26,7 @@
         "compass-mixins": "^0.12.12",
         "eslint": "^8.23.0",
         "eslint-config-prettier": "^8.5.0",
-        "eslint-plugin-react": "^7.31.7",
+        "eslint-plugin-react": "^7.32.1",
         "prettier": "2.7.1",
         "sass": "^1.54.8",
         "vite": "^3.0.7"
