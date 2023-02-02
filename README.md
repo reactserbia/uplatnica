@@ -16,7 +16,7 @@ Uplatnica is project for Serbian PaySlip, vision is to create easiest way to gen
 
 #TODO: WIP
 
-## <a name="2"></a>2. Requirements
+## <a name="2"></a>2. Requirements 
 
 To download and use Fundamental Library for Angular, you will first need to install the [node package manager](https://www.npmjs.com/get-npm).
 
@@ -43,3 +43,5 @@ If you encounter an issue, you can [create a ticket](https://github.com/itmilos/
 [Uplatnica.rs](https://uplatnica.rs/) - Generate Serbian payslip online 
 
 [Plati Mi](https://www.platimi.rs/) - Generate Serbian payslip on mobile device
+
+[WooPlatnica] - WooCommerce payment gateway za generisanje opštih uplatnica i NBS IPS QR kôdova za uplate iz Srbije. 🇷🇸 - https://wordpress.org/plugins/wooplatnica/
