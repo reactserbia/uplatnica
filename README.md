@@ -45,3 +45,5 @@ If you encounter an issue, you can [create a ticket](https://github.com/itmilos/
 [Plati Mi](https://www.platimi.rs/) - Generate Serbian payslip on mobile device
 
 [WooPlatnica](https://wordpress.org/plugins/wooplatnica/) - WooCommerce payment gateway za generisanje opštih uplatnica i NBS IPS QR kôdova za uplate iz Srbije. 🇷🇸 - 
+
+[IPS QR Code](https://github.com/ArtBIT/ips-qr-code/blob/b33a224f9fd202cac261fda65a4709b500866848/README.md) - ips-qr-code je jednostavna CLI aplikacija za generisanje IPS QR kodova. 
