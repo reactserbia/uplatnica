@@ -44,4 +44,4 @@ If you encounter an issue, you can [create a ticket](https://github.com/itmilos/
 
 [Plati Mi](https://www.platimi.rs/) - Generate Serbian payslip on mobile device
 
-[WooPlatnica] - WooCommerce payment gateway za generisanje opštih uplatnica i NBS IPS QR kôdova za uplate iz Srbije. 🇷🇸 - https://wordpress.org/plugins/wooplatnica/
+[WooPlatnica](https://wordpress.org/plugins/wooplatnica/) - WooCommerce payment gateway za generisanje opštih uplatnica i NBS IPS QR kôdova za uplate iz Srbije. 🇷🇸 - 
