@@ -924,9 +924,9 @@ const reducer = (state, action) => {
             }
         case ACTIONS.CURRENT_TEMPLATE:
             return {
-                    ...state,
-                    currentTemplate: action.payload,
-                }
+                ...state,
+                currentTemplate: action.payload,
+            }
         case ACTIONS.MODAL_IS_OPEN:
             return {
                 ...state,
@@ -944,7 +944,7 @@ const reducer = (state, action) => {
             }
         case ACTIONS.USE_SELECTED_TEMPLATE:
             return {
-                ...state, 
+                ...state,
                 ...action.payload,
             }
         case ACTIONS.RESET_VALUES:
@@ -988,47 +988,52 @@ function Payslip() {
     const onSetModelCodeChange = event => dispatch({ type: ACTIONS.MODEL_CODE, payload: event })
     const onPaymentNumberChange = event => dispatch({ type: ACTIONS.PAYMENT_NUMBER, payload: event.target.value })
     const resetValues = () => dispatch({ type: ACTIONS.RESET_VALUES })
-    
+    const printPayslip = () => {
+        window.print()
+    }
+
     const storeTemplate = (templateName) => {
         const templates = JSON.parse(localStorage.getItem('templates')) ?? [];
-        const newTemplate = { ...state.currentTemplate, name: templateName}
+        const newTemplate = { ...state.currentTemplate, name: templateName }
         localStorage.setItem('templates', JSON.stringify([...templates, newTemplate]));
     };
 
 
-const openSaveCurrentTemplateModal = () => {
-    dispatch({ type: ACTIONS.MODAL_IS_OPEN, payload: true } );
-        dispatch({ type: ACTIONS.CURRENT_TEMPLATE, payload: {
-            name: '',
-            payer: state.payer,
-            paymentDescription: state.paymentDescription,
-            receiver: state.receiver,
-            payCode: state.payCode,
-            currencyCode: state.currencyCode,
-            totalAmount: state.totalAmount,
-            bankNumber: state.bankNumber,
-            accountNumber: state.accountNumber,
-            controlNumber: state.accountNumber,
-            accountReceivable: state.accountReceivable,
-            modelCode: state.modelCode,
-            paymentNumber: state.paymentNumber,
-        } })
+    const openSaveCurrentTemplateModal = () => {
+        dispatch({ type: ACTIONS.MODAL_IS_OPEN, payload: true });
+        dispatch({
+            type: ACTIONS.CURRENT_TEMPLATE, payload: {
+                name: '',
+                payer: state.payer,
+                paymentDescription: state.paymentDescription,
+                receiver: state.receiver,
+                payCode: state.payCode,
+                currencyCode: state.currencyCode,
+                totalAmount: state.totalAmount,
+                bankNumber: state.bankNumber,
+                accountNumber: state.accountNumber,
+                controlNumber: state.accountNumber,
+                accountReceivable: state.accountReceivable,
+                modelCode: state.modelCode,
+                paymentNumber: state.paymentNumber,
+            }
+        })
         dispatch({ type: ACTIONS.SAVE_CURRENT_TEMPLATE_MODAL_CONTENT, payload: true })
     };
     const openAllTemplatesModal = () => {
-        dispatch({ type: ACTIONS.MODAL_IS_OPEN, payload: true } );
-        dispatch({ type: ACTIONS.ALL_TEMPLATES_MODAL_CONTENT, payload: true } )
+        dispatch({ type: ACTIONS.MODAL_IS_OPEN, payload: true });
+        dispatch({ type: ACTIONS.ALL_TEMPLATES_MODAL_CONTENT, payload: true })
     };
-    
-    const closeModal = () => {
-        dispatch({ type: ACTIONS.MODAL_IS_OPEN, payload: false } );
-        dispatch({ type: ACTIONS.SAVE_CURRENT_TEMPLATE_MODAL_CONTENT, payload: false })
-        dispatch({ type: ACTIONS.ALL_TEMPLATES_MODAL_CONTENT, payload: false } )
-};
 
-const useTemplate = (template) => {
-    dispatch({ type: ACTIONS.USE_SELECTED_TEMPLATE, payload: template } )
-};
+    const closeModal = () => {
+        dispatch({ type: ACTIONS.MODAL_IS_OPEN, payload: false });
+        dispatch({ type: ACTIONS.SAVE_CURRENT_TEMPLATE_MODAL_CONTENT, payload: false })
+        dispatch({ type: ACTIONS.ALL_TEMPLATES_MODAL_CONTENT, payload: false })
+    };
+
+    const useTemplate = (template) => {
+        dispatch({ type: ACTIONS.USE_SELECTED_TEMPLATE, payload: template })
+    };
 
     let qrModel = createQrModel(state)
     useEffect(() => {
@@ -1056,13 +1061,13 @@ const useTemplate = (template) => {
     const whichModalContentToShow = () => {
         if (state.saveCurrentTemplateModalContent) {
             return (
-                <SaveCurrentTemplate 
+                <SaveCurrentTemplate
                     currentTemplate={state.currentTemplate}
                     storeTemplate={storeTemplate}
                 />
             )
         } else if (state.allTemplatesModalIsContent) {
-          return (<SavedTemplates useTemplate={useTemplate} /> )
+            return (<SavedTemplates useTemplate={useTemplate} />)
         }
     };
 
@@ -1177,19 +1182,20 @@ const useTemplate = (template) => {
             </RightSide>
         </Container>
             {/*TODO: Create button component*/}
-            <button onClick={resetValues} aria-describedby="cleanButtonHelp">Očisti vrednosti</button>
+            <Button onClick={resetValues} aria-describedby="cleanButtonHelp">Očisti vrednosti</Button>
+            <Button type="button" onClick={printPayslip}>Odstampaj uplatnicu</Button>
             <MidleBtn onClick={openSaveCurrentTemplateModal} aria-describedby="saveTemplateButtonHelp">Sačuvaj šablon</MidleBtn>
-            <button onClick={openAllTemplatesModal} aria-describedby="savedTemplatesButtonHelp">Svi šabloni</button>
+            <Button onClick={openAllTemplatesModal} aria-describedby="savedTemplatesButtonHelp">Svi šabloni</Button>
             <div hidden id="cleanButtonHelp">
                 Ovo dugme vraća sve na početne vrednosti.
             </div>{
-        state.modalIsOpen && 
-        <Modal 
-        closeModal={closeModal}
-        >
-           {whichModalContentToShow()}
-        </Modal>
-        }</>
+                state.modalIsOpen &&
+                <Modal
+                    closeModal={closeModal}
+                >
+                    {whichModalContentToShow()}
+                </Modal>
+            }</>
     )
 }
 
@@ -1247,10 +1253,19 @@ const RightSide = styled.div`
 `
 const MidleBtn = styled.button`
     margin: 0 0.7rem;
+    @media print {
+        display: none;
+    }
 `
 const QRcodeSVGConainer = styled.div`
     @media ${deviceBrakepoints.mobile} {
         margin: 5px auto;
+    }
+`
+
+const Button = styled.button`
+    @media print {
+        display: none;
     }
 `
 
