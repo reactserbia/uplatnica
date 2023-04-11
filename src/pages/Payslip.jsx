@@ -10,6 +10,7 @@ import { deviceBrakepoints } from '@config/device-brakepoints.jsx'
 import { useReducer } from 'react'
 import { useLocation } from 'react-router-dom'
 import Modelselect from '../components/Modelselect.jsx'
+import BankCard from '../components/BankCard.jsx'
 
 export const ModelCodeOptions = [
     { value: '97', label: '97' },
@@ -975,127 +976,124 @@ function Payslip() {
     }, [])
 
     return (
+        <>
+        <div>
+          <BankCard bankNumber={state.bankNumber} />
+        </div>
         <Container>
-            <BankSlipTitle>Nalog Za Uplatu</BankSlipTitle>
-            <LeftSide>
-                <Textarea label='Platilac'
-                          id='payer'
-                          help='payerHelp'
-                          helpText='U ovo polje upišite podatke osobe koja je Platilac.'
-                          value={state.payer} whenChanged={onPayerChange} />
-                <Textarea
-                    label='Svrha uplate'
-                    id='paymentDescription'
-                    help='paymentDescriptionHelp'
-                    helpText='U ovo polje upišite svrhu uplate.'
-                    value={state.paymentDescription}
-                    whenChanged={onPaymentDescriptionChange}
-                />
-                <Textarea label='Primalac'
-                          id='receiverDescription'
-                          help='receiverDescriptionHelp'
-                          helpText='U ovo polje upišite podatke osobe koja je Primalac.'
-                          value={state.receiver} whenChanged={onReceiverChange} />
-            </LeftSide>
-            <RightSide>
-                <Modelselect
-                    width={23}
-                    label='Sifra Pacanja'
-                    placeholder='Izaberi'
-                    helpId='payCodeOptionsHelp'
-                    helpText='Selektujte šifru uplate.'
-                    value={state.payCode}
-                    options={PayCodeOptions}
-                    whenChanged={onPayCodeChange}
-                />
-                <Input
-                    width={23}
-                    disabled={true}
-                    label='Valuta'
-                    id='valuta'
-                    help='valutaHelp'
-                    helpText='Ovo polje je onemogućeno jer valuta mora biti RSD.'
-                    value={state.currencyCode}
-                    whenChanged={onCurrencyCode}
-                />
-                <Input
-                    type='number'
-                    width={54}
-                    label='Iznos'
-                    id='totalAmount'
-                    help='totalAmountHelp'
-                    helpText='Ovde upišite brojevima ukupan iznos koji zelite da uplatite.'
-                    value={state.totalAmount}
-                    whenChanged={onTotalAmountChange}
-                />
-                <SplittedInput
-                    legend='Broj Racuna'
-                    inputs={[
-                        {
-                            type: 'text',
-                            width: 23,
-                            value: state.bankNumber,
-                            pattern: '^[1-9]{1}[0-9]{2}$',
-                            required: true,
-                            errorMessage: 'Mora biti trocifren broj',
-                            ariaLabel: 'Prve tri cifre',
-                            whenChanged: onFixBankNumberChange
-                        },
-                        {
-                            type: 'text',
-                            width: 49,
-                            value: state.accountNumber,
-                            pattern: '^[0-9]{13}$',
-                            required: true,
-                            errorMessage: 'Mora biti trinaestocifreni broj',
-                            ariaLabel: 'Narednih trinaest cifara',
-                            whenChanged: onAccountNumberChange,
-                            appendZeros: appendZeros
-                        },
-                        {
-                            type: 'text',
-                            width: 21,
-                            value: state.controlNumber,
-                            pattern: '^[1-9]{1}[0-9]{1}$',
-                            required: true,
-                            errorMessage: 'Mora biti dvocifren broj',
-                            ariaLabel: 'Zadnje dve cifre',
-                            whenChanged: onControlNumberChange
-                        }
-                    ]}
-                />
-                <Modelselect
-                    width={25}
-                    label='Model'
-                    placeholder='Izaberi'
-                    helpId='modelCodeHelp'
-                    helpText='Selektujte model uplate.'
-                    large={true}
-                    value={state.modelCode}
-                    options={ModelCodeOptions}
-                    whenChanged={onSetModelCodeChange}
-                />
-                <Input
-                    type='number'
-                    width={75}
-                    label='Poziv na broj'
-                    id='paymentNumber'
-                    help='paymentNumberHelp'
-                    helpText='Ovde upišite brojevima poziv na broj za ovu uplatnicu.'
-                    value={state.paymentNumber}
-                    whenChanged={onPaymentNumberChange}
-                />
-                <QRcodeSVGConainer>
-                    <QRCodeSVG size={150} value={qrModel} />
-                </QRcodeSVGConainer>
-            </RightSide>
-            {/*TODO: Create button component*/}
-            <button onClick={resetValues} aria-describedby="cleanButtonHelp">Očisti vrednosti</button>
-            <div hidden id="cleanButtonHelp">
-                Ovo dugme vraća sve na početne vrednosti.
-            </div>
+                <BankSlipTitle>Nalog Za Uplatu</BankSlipTitle>
+                <LeftSide>
+                    <Textarea label='Platilac'
+                        id='payer'
+                        help='payerHelp'
+                        helpText='U ovo polje upišite podatke osobe koja je Platilac.'
+                        value={state.payer} whenChanged={onPayerChange} />
+                    <Textarea
+                        label='Svrha uplate'
+                        id='paymentDescription'
+                        help='paymentDescriptionHelp'
+                        helpText='U ovo polje upišite svrhu uplate.'
+                        value={state.paymentDescription}
+                        whenChanged={onPaymentDescriptionChange} />
+                    <Textarea label='Primalac'
+                        id='receiverDescription'
+                        help='receiverDescriptionHelp'
+                        helpText='U ovo polje upišite podatke osobe koja je Primalac.'
+                        value={state.receiver} whenChanged={onReceiverChange} />
+                </LeftSide>
+                <RightSide>
+                    <Modelselect
+                        width={23}
+                        label='Sifra Pacanja'
+                        placeholder='Izaberi'
+                        helpId='payCodeOptionsHelp'
+                        helpText='Selektujte šifru uplate.'
+                        value={state.payCode}
+                        options={PayCodeOptions}
+                        whenChanged={onPayCodeChange} />
+                    <Input
+                        width={23}
+                        disabled={true}
+                        label='Valuta'
+                        id='valuta'
+                        help='valutaHelp'
+                        helpText='Ovo polje je onemogućeno jer valuta mora biti RSD.'
+                        value={state.currencyCode}
+                        whenChanged={onCurrencyCode} />
+                    <Input
+                        type='number'
+                        width={54}
+                        label='Iznos'
+                        id='totalAmount'
+                        help='totalAmountHelp'
+                        helpText='Ovde upišite brojevima ukupan iznos koji zelite da uplatite.'
+                        value={state.totalAmount}
+                        whenChanged={onTotalAmountChange} />
+                    <SplittedInput
+                        legend='Broj Racuna'
+                        inputs={[
+                            {
+                                type: 'text',
+                                width: 23,
+                                value: state.bankNumber,
+                                pattern: '^[1-9]{1}[0-9]{2}$',
+                                required: true,
+                                errorMessage: 'Mora biti trocifren broj',
+                                ariaLabel: 'Prve tri cifre',
+                                whenChanged: onFixBankNumberChange
+                            },
+                            {
+                                type: 'text',
+                                width: 49,
+                                value: state.accountNumber,
+                                pattern: '^[0-9]{13}$',
+                                required: true,
+                                errorMessage: 'Mora biti trinaestocifreni broj',
+                                ariaLabel: 'Narednih trinaest cifara',
+                                whenChanged: onAccountNumberChange,
+                                appendZeros: appendZeros
+                            },
+                            {
+                                type: 'text',
+                                width: 21,
+                                value: state.controlNumber,
+                                pattern: '^[1-9]{1}[0-9]{1}$',
+                                required: true,
+                                errorMessage: 'Mora biti dvocifren broj',
+                                ariaLabel: 'Zadnje dve cifre',
+                                whenChanged: onControlNumberChange
+                            }
+                        ]} />
+                    <Modelselect
+                        width={25}
+                        label='Model'
+                        placeholder='Izaberi'
+                        helpId='modelCodeHelp'
+                        helpText='Selektujte model uplate.'
+                        large={true}
+                        value={state.modelCode}
+                        options={ModelCodeOptions}
+                        whenChanged={onSetModelCodeChange} />
+                    <Input
+                        type='number'
+                        width={75}
+                        label='Poziv na broj'
+                        id='paymentNumber'
+                        help='paymentNumberHelp'
+                        helpText='Ovde upišite brojevima poziv na broj za ovu uplatnicu.'
+                        value={state.paymentNumber}
+                        whenChanged={onPaymentNumberChange} />
+                    <QRcodeSVGConainer>
+                        <QRCodeSVG size={150} value={qrModel} />
+                    </QRcodeSVGConainer>
+                </RightSide>
+                {/*TODO: Create button component*/}
+                <button onClick={resetValues} aria-describedby="cleanButtonHelp">Očisti vrednosti</button>
+                <div hidden id="cleanButtonHelp">
+                    Ovo dugme vraća sve na početne vrednosti.
+                </div>
 
-        </Container>
+            </Container></>
     )
 }
 
@@ -1157,3 +1155,25 @@ const QRcodeSVGConainer = styled.div`
 `
 
 export default Payslip
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
