@@ -977,9 +977,7 @@ function Payslip() {
 
     return (
         <>
-        <div>
-          <BankCard bankNumber={state.bankNumber} />
-        </div>
+        <BankCard bankNumber={state.bankNumber} />
         <Container>
                 <BankSlipTitle>Nalog Za Uplatu</BankSlipTitle>
                 <LeftSide>
