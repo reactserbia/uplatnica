@@ -1153,25 +1153,3 @@ const QRcodeSVGConainer = styled.div`
 `
 
 export default Payslip
-
- 
- 
- 
- 
- 
- 
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
