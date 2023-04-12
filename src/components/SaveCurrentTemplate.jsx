@@ -1,15 +1,17 @@
 import React, { useState } from 'react'
 import S from 'styled-components';
+import Input from './Input';
 
 const SaveCurrentTemplate = ({storeTemplate,currentTemplate}) => {
-    const [templateIsSaved, setTemplateIsSaved] = useState(false)
+    const [templateIsSaved, setTemplateIsSaved] = useState(false);
+    const [templateName, setTemplateName] = useState('');
     const saveTemplate = () => {
-        storeTemplate();
+        storeTemplate(templateName);
         setTemplateIsSaved(true);
     }
 
     const generateSaveCurrentTemplate = () => {
-        const {name, payer,
+        const { payer,
         paymentDescription,
         receiver,
         payCode,
@@ -23,7 +25,17 @@ const SaveCurrentTemplate = ({storeTemplate,currentTemplate}) => {
         paymentNumber} = currentTemplate;
                return  (
                    <div>
-                       <p>Ime sablona: {name}</p>
+                       <div>
+                        <Input
+                            type='text'
+                            width={100}
+                            label='Naziv sablona'
+                            id='templateName'
+                            help='unesite naziv sablona'
+                            helpText='Ovde upišite kako ce sablon da se zove.'
+                            value={templateName}
+                            whenChanged={(event) => setTemplateName(event.target.value)} />
+                       </div>
                        <p>Uplatilac: {payer}</p>
                        <p>Svrha: {paymentDescription}</p>
                        <p>Primalac: {receiver}</p>

@@ -990,7 +990,7 @@ function Payslip() {
     const onPaymentNumberChange = event => dispatch({ type: ACTIONS.PAYMENT_NUMBER, payload: event.target.value })
     const resetValues = () => dispatch({ type: ACTIONS.RESET_VALUES })
     
-    const storeTemplate = () => dispatch({ type: ACTIONS.STORE_TEMPLATE, payload: { ...state.currentTemplate
+    const storeTemplate = (templateName) => dispatch({ type: ACTIONS.STORE_TEMPLATE, payload: { ...state.currentTemplate, name: templateName
 } })
 
 const openSaveCurrentTemplateModal = () => {
@@ -1052,8 +1052,8 @@ const openSaveCurrentTemplateModal = () => {
         if (state.saveCurrentTemplateModalContent) {
             return (
                 <SaveCurrentTemplate 
-                currentTemplate={state.currentTemplate}
-                storeTemplate={storeTemplate}
+                    currentTemplate={state.currentTemplate}
+                    storeTemplate={storeTemplate}
                 />
             )
         } else if (state.allTemplatesModalIsContent) {
