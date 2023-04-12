@@ -3,14 +3,20 @@ import S from 'styled-components';
 import Input from './Input';
 
 const SaveCurrentTemplate = ({storeTemplate,currentTemplate}) => {
-    const [templateIsSaved, setTemplateIsSaved] = useState(false);
+    const [templateIsSavedMsg, setTemplateIsSavedMsg] = useState('');
     const [templateName, setTemplateName] = useState('');
 
     const saveTemplate = () => {
         const templates = JSON.parse(localStorage.getItem('templates')) ?? [];
 
-        storeTemplate(templateName);
-        setTemplateIsSaved(true);
+        const isDuplicatesTemplates = templates.find((item) => item.name === templateName);
+        if (isDuplicatesTemplates === undefined) {
+            storeTemplate(templateName);
+            setTemplateIsSavedMsg(true);
+            setTemplateIsSavedMsg('Šablon je uspešno sačuvan')
+        } else {
+            setTemplateIsSavedMsg('Šablon nije sačuvan. Šablon sa tim nazivom već postoji')
+        }
     }
 
     const generateSaveCurrentTemplate = () => {
@@ -49,7 +55,7 @@ const SaveCurrentTemplate = ({storeTemplate,currentTemplate}) => {
                        <p>Model: {modelCode.value}</p>
                        <p>Poziv na broj: {paymentNumber}</p>
                        <SaveTemplateBtn disabled={templateName === ''} onClick={saveTemplate}>Sačuvaj šablon</SaveTemplateBtn>
-                       {templateIsSaved && <p>Šablon je sačuvan</p>}
+                       <p>{templateIsSavedMsg}</p>
                    </div>
                )
        };
