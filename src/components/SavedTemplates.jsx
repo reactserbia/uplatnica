@@ -26,7 +26,7 @@ const SavedTemplates = ({useTemplate}) => {
             {templates.length > 0 ? generateAllSavedTemplates() : <p>Nema sačuvanih šablona</p> }
             </TemplateList>
         </TemplateListWrapper>
-        {templates.length === 0 || <ClearTemplatesBtn onClick={clearAllTemplates}>Obrisi sve sablone</ClearTemplatesBtn>}
+        {templates.length === 0 || <ClearTemplatesBtn onClick={clearAllTemplates}>Obriši sve šablone</ClearTemplatesBtn>}
         <p>{clearallTemplatedMsg}</p>
     </>
   )

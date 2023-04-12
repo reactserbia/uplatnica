@@ -835,7 +835,6 @@ const initialState = {
     modelCode: ModelCodeOptions[1],
     paymentNumber: '',
     currentTemplate: {},
- //   templates: templates,
     modalIsOpen: false,
     saveCurrentTemplateModalContent: false,
     allTemplatesModalIsContent: false,
@@ -855,7 +854,6 @@ const ACTIONS = {
     PAYMENT_NUMBER: 'payment-number-change',
     RESET_VALUES: 'reset-values',
     USE_SELECTED_TEMPLATE: 'use-selected-template',
-    STORE_TEMPLATE: 'store-template',
     CURRENT_TEMPLATE: 'current-template',
     MODAL_IS_OPEN: 'modal-is-open',
     SAVE_CURRENT_TEMPLATE_MODAL_CONTENT: 'save-template-modal-is-open',
@@ -929,11 +927,6 @@ const reducer = (state, action) => {
                     ...state,
                     currentTemplate: action.payload,
                 }
-        case ACTIONS.STORE_TEMPLATE:
-            return {
-                    ...state,
-                    templates: [...state.templates, action.payload]
-                }
         case ACTIONS.MODAL_IS_OPEN:
             return {
                 ...state,
@@ -997,11 +990,9 @@ function Payslip() {
     const resetValues = () => dispatch({ type: ACTIONS.RESET_VALUES })
     
     const storeTemplate = (templateName) => {
-//     dispatch({ type: ACTIONS.STORE_TEMPLATE, payload: { ...state.currentTemplate, name: templateName
-// } })
-const templates = JSON.parse(localStorage.getItem('templates')) ?? [];
-const newTemplate = { ...state.currentTemplate, name: templateName}
-localStorage.setItem('templates', JSON.stringify([...templates, newTemplate]));
+        const templates = JSON.parse(localStorage.getItem('templates')) ?? [];
+        const newTemplate = { ...state.currentTemplate, name: templateName}
+        localStorage.setItem('templates', JSON.stringify([...templates, newTemplate]));
     };
 
 
