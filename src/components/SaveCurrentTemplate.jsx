@@ -1,7 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import S from 'styled-components';
 
-const SaveCurrentTemplate = ({saveTemplate,currentTemplate}) => {
+const SaveCurrentTemplate = ({storeTemplate,currentTemplate}) => {
+    const [templateIsSaved, setTemplateIsSaved] = useState(false)
+    const saveTemplate = () => {
+        storeTemplate();
+        setTemplateIsSaved(true);
+    }
 
     const generateSaveCurrentTemplate = () => {
         const {name, payer,
@@ -29,6 +34,7 @@ const SaveCurrentTemplate = ({saveTemplate,currentTemplate}) => {
                        <p>Model: {modelCode.value}</p>
                        <p>Poziv na broj: {paymentNumber}</p>
                        <SaveTemplateBtn onClick={saveTemplate}>Sačuvaj šablon</SaveTemplateBtn>
+                       {templateIsSaved && <p>Šablon je sačuvan</p>}
                    </div>
                )
        };

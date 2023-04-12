@@ -836,8 +836,9 @@ const initialState = {
     paymentNumber: '',
     currentTemplate: {},
     templates: [],
-    saveCurrentTemplateModalIsOpen: false,
-    allTemplatesModalIsOpen: false,
+    modalIsOpen: false,
+    saveCurrentTemplateModalContent: false,
+    allTemplatesModalIsContent: false,
 }
 
 const ACTIONS = {
@@ -855,8 +856,9 @@ const ACTIONS = {
     RESET_VALUES: 'reset-values',
     STORE_TEMPLATE: 'store-template',
     CURRENT_TEMPLATE: 'current-template',
-    SAVE_CURRENT_TEMPLATE_MODAL_IS_OPEN: 'save-template-modal-is-open',
-    ALL_TEMPLATES_MODAL_IS_OPEN: 'all-templates-modal-is-open',
+    MODAL_IS_OPEN: 'modal-is-open',
+    SAVE_CURRENT_TEMPLATE_MODAL_CONTENT: 'save-template-modal-is-open',
+    ALL_TEMPLATES_MODAL_CONTENT: 'all-templates-modal-is-open',
 }
 
 const init = () => initialState
@@ -931,15 +933,20 @@ const reducer = (state, action) => {
                     ...state,
                     templates: [...state.templates, action.payload]
                 }
-        case ACTIONS.SAVE_CURRENT_TEMPLATE_MODAL_IS_OPEN:
+        case ACTIONS.MODAL_IS_OPEN:
             return {
                 ...state,
-                saveCurrentTemplateModalIsOpen: action.payload,
+                modalIsOpen: action.payload,
             }
-        case ACTIONS.ALL_TEMPLATES_MODAL_IS_OPEN:
+        case ACTIONS.SAVE_CURRENT_TEMPLATE_MODAL_CONTENT:
             return {
                 ...state,
-                allTemplatesModalIsOpen: action.payload,
+                saveCurrentTemplateModalContent: action.payload,
+            }
+        case ACTIONS.ALL_TEMPLATES_MODAL_CONTENT:
+            return {
+                ...state,
+                allTemplatesModalIsContent: action.payload,
             }
         case ACTIONS.RESET_VALUES:
             return init()
@@ -987,6 +994,7 @@ function Payslip() {
 } })
 
 const openSaveCurrentTemplateModal = () => {
+    dispatch({ type: ACTIONS.MODAL_IS_OPEN, payload: true } );
         dispatch({ type: ACTIONS.CURRENT_TEMPLATE, payload: {
             name: 'Sablon 1',
             payer: state.payer,
@@ -1002,14 +1010,17 @@ const openSaveCurrentTemplateModal = () => {
             modelCode: state.modelCode,
             paymentNumber: state.paymentNumber,
         } })
-        dispatch({ type: ACTIONS.SAVE_CURRENT_TEMPLATE_MODAL_IS_OPEN, payload: true })
-};
-const openAllTemplatesModal = () => {
-        dispatch({ type: ACTIONS.ALL_TEMPLATES_MODAL_IS_OPEN, payload: true } )
-};
-
-const closeModal = () => {
-    dispatch({ type: ACTIONS.SAVE_CURRENT_TEMPLATE_MODAL_IS_OPEN, payload: false })
+        dispatch({ type: ACTIONS.SAVE_CURRENT_TEMPLATE_MODAL_CONTENT, payload: true })
+    };
+    const openAllTemplatesModal = () => {
+        dispatch({ type: ACTIONS.MODAL_IS_OPEN, payload: true } );
+        dispatch({ type: ACTIONS.ALL_TEMPLATES_MODAL_CONTENT, payload: true } )
+    };
+    
+    const closeModal = () => {
+        dispatch({ type: ACTIONS.MODAL_IS_OPEN, payload: false } );
+        dispatch({ type: ACTIONS.SAVE_CURRENT_TEMPLATE_MODAL_CONTENT, payload: false })
+        dispatch({ type: ACTIONS.ALL_TEMPLATES_MODAL_CONTENT, payload: false } )
 };
 
 
@@ -1038,19 +1049,16 @@ const closeModal = () => {
     }, [])
 
     const whichModalContentToShow = () => {
-        console.log('MODALSHOW')
-        if (state.saveCurrentTemplateModalIsOpen) {
+        if (state.saveCurrentTemplateModalContent) {
             return (
                 <SaveCurrentTemplate 
                 currentTemplate={state.currentTemplate}
                 storeTemplate={storeTemplate}
                 />
             )
-        
-        } else if (state.allTemplatesModalIsOpen) {
+        } else if (state.allTemplatesModalIsContent) {
           return (<SavedTemplates templates={state.templates} /> )
         }
-        return null;
     };
 
     return (
@@ -1165,12 +1173,12 @@ const closeModal = () => {
             {/*TODO: Create button component*/}
             <button onClick={resetValues} aria-describedby="cleanButtonHelp">Očisti vrednosti</button>
             <button onClick={openSaveCurrentTemplateModal} aria-describedby="saveTemplateButtonHelp">Sačuvaj šablon</button>
-            <button onClick={openAllTemplatesModal} aria-describedby="savedTemplatesButtonHelp">Šabloni</button>
+            <button onClick={openAllTemplatesModal} aria-describedby="savedTemplatesButtonHelp">Svi šabloni</button>
             <div hidden id="cleanButtonHelp">
                 Ovo dugme vraća sve na početne vrednosti.
             </div>
         </Container>{
-        state.saveCurrentTemplateModalIsOpen && 
+        state.modalIsOpen && 
         <Modal 
         closeModal={closeModal}
         >

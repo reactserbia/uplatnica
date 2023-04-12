@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import S from 'styled-components';
-import SavedTemplates from './SavedTemplates';
 
 const Modal = ({closeModal, children}) => {
  
