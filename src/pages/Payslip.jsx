@@ -830,7 +830,9 @@ const initialState = {
     controlNumber: '99',
     accountReceivable: '',
     modelCode: ModelCodeOptions[1],
-    paymentNumber: ''
+    paymentNumber: '',
+    templates: [],
+    saveTemplateModalIsOpen: false,
 }
 
 const ACTIONS = {
@@ -845,7 +847,9 @@ const ACTIONS = {
     CONTROL_NUMBER_CHANGE: 'control-number-change',
     MODEL_CODE: 'model-code-change',
     PAYMENT_NUMBER: 'payment-number-change',
-    RESET_VALUES: 'reset-values'
+    RESET_VALUES: 'reset-values',
+    SAVE_TEMPLATE: 'save-template',
+    SAVE_TEMPLATE_MODAL_IS_OPEN: 'save-template-modal-is-open',
 }
 
 const init = () => initialState
@@ -910,6 +914,16 @@ const reducer = (state, action) => {
                 ...state,
                 paymentNumber: action.payload
             }
+        case ACTIONS.SAVE_TEMPLATE:
+            return {
+                ...state,
+                templates: [...state.templates, action.payload]
+            }
+        case ACTIONS.SAVE_TEMPLATE_MODAL_IS_OPEN:
+            return {
+                ...state,
+                saveTemplateModalIsOpen: action.payload,
+            }
         case ACTIONS.RESET_VALUES:
             return init()
         default:
@@ -921,6 +935,7 @@ const reducer = (state, action) => {
 function Payslip() {
     const [state, dispatch] = useReducer(reducer, initialState, init)
     const params = new URLSearchParams(useLocation().search)
+    console.log( state)
 
     const onPayerChange = event => dispatch({ type: ACTIONS.PAYER_CHANGED, payload: event.target.value })
     const onPaymentDescriptionChange = event => dispatch({ type: ACTIONS.PAYMENT_DESCRIPTION, payload: event.target.value })
@@ -951,6 +966,27 @@ function Payslip() {
     const onSetModelCodeChange = event => dispatch({ type: ACTIONS.MODEL_CODE, payload: event })
     const onPaymentNumberChange = event => dispatch({ type: ACTIONS.PAYMENT_NUMBER, payload: event.target.value })
     const resetValues = () => dispatch({ type: ACTIONS.RESET_VALUES })
+    
+    const saveTemplate = () => dispatch({ type: ACTIONS.SAVE_TEMPLATE, payload: {
+    name: 'prvi',
+    payer: state.payer,
+    paymentDescription: state.paymentDescription,
+    receiver: state.receiver,
+    payCode: state.payCode,
+    currencyCode: state.currencyCode,
+    totalAmount: state.totalAmount,
+    bankNumber: state.bankNumber,
+    accountNumber: state.accountNumber,
+    controlNumber: state.accountNumber,
+    accountReceivable: state.accountReceivable,
+    modelCode: state.modelCode,
+    paymentNumber: state.paymentNumber,
+} })
+
+const openSaveTemplateModal = () => {
+        dispatch({ type: ACTIONS.SAVE_TEMPLATE_MODAL_IS_OPEN, payload: true })
+        saveTemplate();
+};
 
     let qrModel = createQrModel(state)
     useEffect(() => {
@@ -1093,6 +1129,7 @@ function Payslip() {
             </RightSide>
             {/*TODO: Create button component*/}
             <button onClick={resetValues} aria-describedby="cleanButtonHelp">Očisti vrednosti</button>
+            <button onClick={openSaveTemplateModal} aria-describedby="saveTemplateButtonHelp">Sacuvaj sablon</button>
             <div hidden id="cleanButtonHelp">
                 Ovo dugme vraća sve na početne vrednosti.
             </div>
