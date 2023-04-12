@@ -15,7 +15,7 @@ const SavedTemplates = ({useTemplate}) => {
   
   const clearAllTemplates = () => {
     localStorage.setItem('templates', JSON.stringify([]));
-    setClearedAllTemplatesMsg('Sabloni su obrisani');
+    setClearedAllTemplatesMsg('Šabloni su obrisani');
   };
 
   return (
@@ -26,7 +26,7 @@ const SavedTemplates = ({useTemplate}) => {
             {templates.length > 0 ? generateAllSavedTemplates() : <p>Nema sačuvanih šablona</p> }
             </TemplateList>
         </TemplateListWrapper>
-        {templates.length === 0 || <button onClick={clearAllTemplates}>Obrisi sve sablone</button>}
+        {templates.length === 0 || <ClearTemplatesBtn onClick={clearAllTemplates}>Obrisi sve sablone</ClearTemplatesBtn>}
         <p>{clearallTemplatedMsg}</p>
     </>
   )
@@ -49,6 +49,10 @@ const SingleTemplate = S.li
 `
 const UseTemplateBtn = S.button
 `padding: 0.3rem;
+`
+const ClearTemplatesBtn = S.button
+`padding: 0.3rem;
+ margin-top: 1.5rem;
 `
 
 export default SavedTemplates;
