@@ -974,25 +974,12 @@ function Payslip() {
     const onPaymentNumberChange = event => dispatch({ type: ACTIONS.PAYMENT_NUMBER, payload: event.target.value })
     const resetValues = () => dispatch({ type: ACTIONS.RESET_VALUES })
     
-    const storeTemplate = () => dispatch({ type: ACTIONS.STORE_TEMPLATE, payload: {
-    name: '',
-    payer: state.payer,
-    paymentDescription: state.paymentDescription,
-    receiver: state.receiver,
-    payCode: state.payCode,
-    currencyCode: state.currencyCode,
-    totalAmount: state.totalAmount,
-    bankNumber: state.bankNumber,
-    accountNumber: state.accountNumber,
-    controlNumber: state.accountNumber,
-    accountReceivable: state.accountReceivable,
-    modelCode: state.modelCode,
-    paymentNumber: state.paymentNumber,
+    const storeTemplate = () => dispatch({ type: ACTIONS.STORE_TEMPLATE, payload: { ...state.currentTemplate
 } })
 
 const openSaveTemplateModal = () => {
         dispatch({ type: ACTIONS.CURRENT_TEMPLATE, payload: {
-            name: '',
+            name: 'Sablon 1',
             payer: state.payer,
             paymentDescription: state.paymentDescription,
             receiver: state.receiver,
@@ -1154,8 +1141,10 @@ const closeModal = () => {
         </Container>{
         state.saveTemplateModalIsOpen && 
         <SaveTemplateModal 
-        templateData={state.currentTemplate} 
-        closeModal={closeModal} 
+        currentTemplate={state.currentTemplate}
+        storeTemplate={storeTemplate}
+        closeModal={closeModal}
+        templates={state.templates}
         />
         }</>
     )
