@@ -2,13 +2,20 @@ import React, { useState } from 'react'
 import S from 'styled-components';
 
 const SavedTemplates = ({useTemplate}) => {
-  const[clearallTemplatedMsg, setClearedAllTemplatesMsg] = useState('')
+  const[clearallTemplatedMsg, setClearedAllTemplatesMsg] = useState('');
+  const[templatedIsUsedMsg, setTemplateIsUsedMsg] = useState('');
+
   const templates = JSON.parse(localStorage.getItem('templates')) ?? [];
+
+  const handleUseTemplate = (template) => {
+    useTemplate(template);
+    setTemplateIsUsedMsg('Šablon je upotrebljen');
+  };
 
   const generateAllSavedTemplates = () => {
         return templates.map((item) => 
         <SingleTemplate key={item.name}>
-          {item?.name} <UseTemplateBtn onClick={() => useTemplate(item)}>Upotrebi šablon</UseTemplateBtn>
+          {item?.name} <UseTemplateBtn onClick={() => handleUseTemplate(item)}>Upotrebi šablon</UseTemplateBtn>
           </SingleTemplate>
           )
      }
@@ -21,6 +28,7 @@ const SavedTemplates = ({useTemplate}) => {
   return (
     <>
         <h4>Sačuvani šabloni</h4>
+        <h6>{templatedIsUsedMsg}</h6>
         <TemplateListWrapper>
             <TemplateList>
             {templates.length > 0 ? generateAllSavedTemplates() : <p>Nema sačuvanih šablona</p> }
