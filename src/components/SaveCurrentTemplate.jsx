@@ -38,7 +38,7 @@ const SaveCurrentTemplate = ({storeTemplate,currentTemplate}) => {
                         <Input
                             type='text'
                             width={100}
-                            label='Naziv šablona obavezan'
+                            label='Naziv šablona je obavezan'
                             id='templateName'
                             help='unesite naziv šablona'
                             helpText='Ovde upišite kako će šablon da se zove.'
