@@ -1177,7 +1177,7 @@ const useTemplate = (template) => {
             </RightSide>
             {/*TODO: Create button component*/}
             <button onClick={resetValues} aria-describedby="cleanButtonHelp">Očisti vrednosti</button>
-            <button onClick={openSaveCurrentTemplateModal} aria-describedby="saveTemplateButtonHelp">Sačuvaj šablon</button>
+            <MidleBtn onClick={openSaveCurrentTemplateModal} aria-describedby="saveTemplateButtonHelp">Sačuvaj šablon</MidleBtn>
             <button onClick={openAllTemplatesModal} aria-describedby="savedTemplatesButtonHelp">Svi šabloni</button>
             <div hidden id="cleanButtonHelp">
                 Ovo dugme vraća sve na početne vrednosti.
@@ -1243,6 +1243,9 @@ const RightSide = styled.div`
         flex-direction: column;
         width: 100%;
     }
+`
+const MidleBtn = styled.button`
+    margin: 0 0.7rem;
 `
 const QRcodeSVGConainer = styled.div`
     @media ${deviceBrakepoints.mobile} {
