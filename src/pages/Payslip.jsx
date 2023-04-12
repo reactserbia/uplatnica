@@ -11,6 +11,7 @@ import { useReducer } from 'react'
 import { useLocation } from 'react-router-dom'
 import Modelselect from '../components/Modelselect.jsx'
 import BankCard from '../components/BankCard.jsx'
+import SaveTemplateModal from '../components/SaveTemplateModal.jsx'
 
 export const ModelCodeOptions = [
     { value: '97', label: '97' },
@@ -988,6 +989,10 @@ const openSaveTemplateModal = () => {
         saveTemplate();
 };
 
+const closeModal = () => {
+    dispatch({ type: ACTIONS.SAVE_TEMPLATE_MODAL_IS_OPEN, payload: false })
+};
+
     let qrModel = createQrModel(state)
     useEffect(() => {
         const accountNumber = params.get('account-number')
@@ -1012,27 +1017,26 @@ const openSaveTemplateModal = () => {
     }, [])
 
     return (
-        <Container>
+        <><Container>
             <BankSlipTitle>Nalog Za Uplatu</BankSlipTitle>
             <LeftSide>
                 <Textarea label='Platilac'
-                          id='payer'
-                          help='payerHelp'
-                          helpText='U ovo polje upišite podatke osobe koja je Platilac.'
-                          value={state.payer} whenChanged={onPayerChange} />
+                    id='payer'
+                    help='payerHelp'
+                    helpText='U ovo polje upišite podatke osobe koja je Platilac.'
+                    value={state.payer} whenChanged={onPayerChange} />
                 <Textarea
                     label='Svrha uplate'
                     id='paymentDescription'
                     help='paymentDescriptionHelp'
                     helpText='U ovo polje upišite svrhu uplate.'
                     value={state.paymentDescription}
-                    whenChanged={onPaymentDescriptionChange}
-                />
+                    whenChanged={onPaymentDescriptionChange} />
                 <Textarea label='Primalac'
-                          id='receiverDescription'
-                          help='receiverDescriptionHelp'
-                          helpText='U ovo polje upišite podatke osobe koja je Primalac.'
-                          value={state.receiver} whenChanged={onReceiverChange} />
+                    id='receiverDescription'
+                    help='receiverDescriptionHelp'
+                    helpText='U ovo polje upišite podatke osobe koja je Primalac.'
+                    value={state.receiver} whenChanged={onReceiverChange} />
             </LeftSide>
             <RightSide>
                 <Modelselect
@@ -1043,8 +1047,7 @@ const openSaveTemplateModal = () => {
                     helpText='Selektujte šifru uplate.'
                     value={state.payCode}
                     options={PayCodeOptions}
-                    whenChanged={onPayCodeChange}
-                />
+                    whenChanged={onPayCodeChange} />
                 <Input
                     width={23}
                     disabled={true}
@@ -1053,8 +1056,7 @@ const openSaveTemplateModal = () => {
                     help='valutaHelp'
                     helpText='Ovo polje je onemogućeno jer valuta mora biti RSD.'
                     value={state.currencyCode}
-                    whenChanged={onCurrencyCode}
-                />
+                    whenChanged={onCurrencyCode} />
                 <Input
                     type='number'
                     width={54}
@@ -1063,8 +1065,7 @@ const openSaveTemplateModal = () => {
                     help='totalAmountHelp'
                     helpText='Ovde upišite brojevima ukupan iznos koji zelite da uplatite.'
                     value={state.totalAmount}
-                    whenChanged={onTotalAmountChange}
-                />
+                    whenChanged={onTotalAmountChange} />
                 <SplittedInput
                     legend='Broj Racuna'
                     inputs={[
@@ -1099,8 +1100,7 @@ const openSaveTemplateModal = () => {
                             ariaLabel: 'Zadnje dve cifre',
                             whenChanged: onControlNumberChange
                         }
-                    ]}
-                />
+                    ]} />
                 <BankCard bankNumber={state.bankNumber} />
                 <Modelselect
                     width={25}
@@ -1111,8 +1111,7 @@ const openSaveTemplateModal = () => {
                     large={true}
                     value={state.modelCode}
                     options={ModelCodeOptions}
-                    whenChanged={onSetModelCodeChange}
-                />
+                    whenChanged={onSetModelCodeChange} />
                 <Input
                     type='number'
                     width={75}
@@ -1121,8 +1120,7 @@ const openSaveTemplateModal = () => {
                     help='paymentNumberHelp'
                     helpText='Ovde upišite brojevima poziv na broj za ovu uplatnicu.'
                     value={state.paymentNumber}
-                    whenChanged={onPaymentNumberChange}
-                />
+                    whenChanged={onPaymentNumberChange} />
                 <QRcodeSVGConainer>
                     <QRCodeSVG size={150} value={qrModel} />
                 </QRcodeSVGConainer>
@@ -1133,8 +1131,9 @@ const openSaveTemplateModal = () => {
             <div hidden id="cleanButtonHelp">
                 Ovo dugme vraća sve na početne vrednosti.
             </div>
-
-        </Container>
+        </Container>{
+        state.saveTemplateModalIsOpen && <SaveTemplateModal templateData={state.templates} closeModal={closeModal} />
+        }</>
     )
 }
 
