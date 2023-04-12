@@ -39,7 +39,7 @@ height: 100%;
 display: flex;
 justify-content: center;
 align-items: center;
-background-color: rgb(39,34,100, 0.5)
+background-color: rgb(39,34,100, 0.5);
 `
 const Content = S.div
 `width: 50%;
