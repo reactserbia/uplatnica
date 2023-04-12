@@ -999,7 +999,7 @@ function Payslip() {
 const openSaveCurrentTemplateModal = () => {
     dispatch({ type: ACTIONS.MODAL_IS_OPEN, payload: true } );
         dispatch({ type: ACTIONS.CURRENT_TEMPLATE, payload: {
-            name: '/',
+            name: '',
             payer: state.payer,
             paymentDescription: state.paymentDescription,
             receiver: state.receiver,
