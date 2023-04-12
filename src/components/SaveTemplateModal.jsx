@@ -5,12 +5,14 @@ const SaveTemplateModal = ({templateData, closeModal}) => {
 
      
     const generateTemplate = () => {
-        if (templateData.length > 0) {
-            const {name} = templateData;
-    return  (<div><span>Ime sablona: </span><span>{name}</span></div>)
-        }
-    return  (<div><span>Nema sacuvanih sablona</span></div>
-        )
+        console.log({ templateData })
+     const {name, payer} = templateData;
+            return  (
+                <div>
+                    <div><span>Ime sablona: </span><span>{name}</span></div>
+                    <div><span>Uplatilac: </span><span>{payer}</span></div>
+                </div>
+            )
     };
 
   return (

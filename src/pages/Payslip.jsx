@@ -832,6 +832,7 @@ const initialState = {
     accountReceivable: '',
     modelCode: ModelCodeOptions[1],
     paymentNumber: '',
+    currentTemplate: {},
     templates: [],
     saveTemplateModalIsOpen: false,
 }
@@ -849,7 +850,8 @@ const ACTIONS = {
     MODEL_CODE: 'model-code-change',
     PAYMENT_NUMBER: 'payment-number-change',
     RESET_VALUES: 'reset-values',
-    SAVE_TEMPLATE: 'save-template',
+    STORE_TEMPLATE: 'store-template',
+    CURRENT_TEMPLATE: 'current-template',
     SAVE_TEMPLATE_MODAL_IS_OPEN: 'save-template-modal-is-open',
 }
 
@@ -915,11 +917,16 @@ const reducer = (state, action) => {
                 ...state,
                 paymentNumber: action.payload
             }
-        case ACTIONS.SAVE_TEMPLATE:
+        case ACTIONS.CURRENT_TEMPLATE:
             return {
-                ...state,
-                templates: [...state.templates, action.payload]
-            }
+                    ...state,
+                    currentTemplate: action.payload,
+                }
+        case ACTIONS.STORE_TEMPLATE:
+            return {
+                    ...state,
+                    templates: [...state.templates, action.payload]
+                }
         case ACTIONS.SAVE_TEMPLATE_MODAL_IS_OPEN:
             return {
                 ...state,
@@ -936,7 +943,6 @@ const reducer = (state, action) => {
 function Payslip() {
     const [state, dispatch] = useReducer(reducer, initialState, init)
     const params = new URLSearchParams(useLocation().search)
-    console.log( state)
 
     const onPayerChange = event => dispatch({ type: ACTIONS.PAYER_CHANGED, payload: event.target.value })
     const onPaymentDescriptionChange = event => dispatch({ type: ACTIONS.PAYMENT_DESCRIPTION, payload: event.target.value })
@@ -968,8 +974,8 @@ function Payslip() {
     const onPaymentNumberChange = event => dispatch({ type: ACTIONS.PAYMENT_NUMBER, payload: event.target.value })
     const resetValues = () => dispatch({ type: ACTIONS.RESET_VALUES })
     
-    const saveTemplate = () => dispatch({ type: ACTIONS.SAVE_TEMPLATE, payload: {
-    name: 'prvi',
+    const storeTemplate = () => dispatch({ type: ACTIONS.STORE_TEMPLATE, payload: {
+    name: '',
     payer: state.payer,
     paymentDescription: state.paymentDescription,
     receiver: state.receiver,
@@ -985,8 +991,22 @@ function Payslip() {
 } })
 
 const openSaveTemplateModal = () => {
+        dispatch({ type: ACTIONS.CURRENT_TEMPLATE, payload: {
+            name: '',
+            payer: state.payer,
+            paymentDescription: state.paymentDescription,
+            receiver: state.receiver,
+            payCode: state.payCode,
+            currencyCode: state.currencyCode,
+            totalAmount: state.totalAmount,
+            bankNumber: state.bankNumber,
+            accountNumber: state.accountNumber,
+            controlNumber: state.accountNumber,
+            accountReceivable: state.accountReceivable,
+            modelCode: state.modelCode,
+            paymentNumber: state.paymentNumber,
+        } })
         dispatch({ type: ACTIONS.SAVE_TEMPLATE_MODAL_IS_OPEN, payload: true })
-        saveTemplate();
 };
 
 const closeModal = () => {
@@ -1132,7 +1152,11 @@ const closeModal = () => {
                 Ovo dugme vraća sve na početne vrednosti.
             </div>
         </Container>{
-        state.saveTemplateModalIsOpen && <SaveTemplateModal templateData={state.templates} closeModal={closeModal} />
+        state.saveTemplateModalIsOpen && 
+        <SaveTemplateModal 
+        templateData={state.currentTemplate} 
+        closeModal={closeModal} 
+        />
         }</>
     )
 }
