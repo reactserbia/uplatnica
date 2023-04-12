@@ -835,7 +835,7 @@ const initialState = {
     modelCode: ModelCodeOptions[1],
     paymentNumber: '',
     currentTemplate: {},
-    templates: [],
+ //   templates: templates,
     modalIsOpen: false,
     saveCurrentTemplateModalContent: false,
     allTemplatesModalIsContent: false,
@@ -996,9 +996,15 @@ function Payslip() {
     const onPaymentNumberChange = event => dispatch({ type: ACTIONS.PAYMENT_NUMBER, payload: event.target.value })
     const resetValues = () => dispatch({ type: ACTIONS.RESET_VALUES })
     
-    const storeTemplate = (templateName) => dispatch({ type: ACTIONS.STORE_TEMPLATE, payload: { ...state.currentTemplate, name: templateName
-} })
-console.log(state.templates)
+    const storeTemplate = (templateName) => {
+//     dispatch({ type: ACTIONS.STORE_TEMPLATE, payload: { ...state.currentTemplate, name: templateName
+// } })
+const templates = JSON.parse(localStorage.getItem('templates')) ?? [];
+const newTemplate = { ...state.currentTemplate, name: templateName}
+localStorage.setItem('templates', JSON.stringify([...templates, newTemplate]));
+    };
+
+
 const openSaveCurrentTemplateModal = () => {
     dispatch({ type: ACTIONS.MODAL_IS_OPEN, payload: true } );
         dispatch({ type: ACTIONS.CURRENT_TEMPLATE, payload: {
@@ -1065,7 +1071,7 @@ const useTemplate = (template) => {
                 />
             )
         } else if (state.allTemplatesModalIsContent) {
-          return (<SavedTemplates templates={state.templates} useTemplate={useTemplate} /> )
+          return (<SavedTemplates useTemplate={useTemplate} /> )
         }
     };
 

@@ -1,11 +1,12 @@
 import React from 'react'
 import S from 'styled-components';
 
-const SavedTemplates = ({templates,useTemplate}) => {
+const SavedTemplates = ({useTemplate}) => {
+  const templates1 = JSON.parse(localStorage.getItem('templates')) ?? [];
     const generateAllSavedTemplates = () => {
-        return templates.map((item) => 
+        return templates1.map((item) => 
         <li key={item.name}>
-          {item?.name} <UseTemplateBtn onClick={() => useTemplate(item)}>Koristi sablon</UseTemplateBtn>
+          {item?.name} <UseTemplateBtn onClick={() => useTemplate(item)}>Upotrebi šablon</UseTemplateBtn>
           </li>
           )
      }
@@ -15,7 +16,7 @@ const SavedTemplates = ({templates,useTemplate}) => {
         <h4>Sačuvani šabloni</h4>
         <TemplateListWrapper>
             <TemplateList>
-            {templates.length > 0 ? generateAllSavedTemplates() : <p>Nema sacuvanih sablona</p> }
+            {templates1.length > 0 ? generateAllSavedTemplates() : <p>Nema sačuvanih šablona</p> }
             </TemplateList>
         </TemplateListWrapper>
     </>
