@@ -10,6 +10,7 @@ import { deviceBrakepoints } from '@config/device-brakepoints.jsx'
 import { useReducer } from 'react'
 import { useLocation } from 'react-router-dom'
 import Modelselect from '../components/Modelselect.jsx'
+import BankCard from '../components/BankCard.jsx'
 
 export const ModelCodeOptions = [
     { value: '97', label: '97' },
@@ -1064,6 +1065,7 @@ function Payslip() {
                         }
                     ]}
                 />
+                <BankCard bankNumber={state.bankNumber} />
                 <Modelselect
                     width={25}
                     label='Model'
