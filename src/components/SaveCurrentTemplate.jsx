@@ -9,7 +9,6 @@ const SaveCurrentTemplate = ({storeTemplate,currentTemplate}) => {
         storeTemplate(templateName);
         setTemplateIsSaved(true);
     }
-
     const generateSaveCurrentTemplate = () => {
         const { payer,
         paymentDescription,
@@ -20,7 +19,6 @@ const SaveCurrentTemplate = ({storeTemplate,currentTemplate}) => {
         bankNumber,
         accountNumber,
         controlNumber,
-        accountReceivable,
         modelCode,
         paymentNumber} = currentTemplate;
                return  (

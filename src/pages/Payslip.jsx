@@ -854,6 +854,7 @@ const ACTIONS = {
     MODEL_CODE: 'model-code-change',
     PAYMENT_NUMBER: 'payment-number-change',
     RESET_VALUES: 'reset-values',
+    USE_SELECTED_TEMPLATE: 'use-selected-template',
     STORE_TEMPLATE: 'store-template',
     CURRENT_TEMPLATE: 'current-template',
     MODAL_IS_OPEN: 'modal-is-open',
@@ -948,6 +949,11 @@ const reducer = (state, action) => {
                 ...state,
                 allTemplatesModalIsContent: action.payload,
             }
+        case ACTIONS.USE_SELECTED_TEMPLATE:
+            return {
+                ...state, 
+                ...action.payload,
+            }
         case ACTIONS.RESET_VALUES:
             return init()
         default:
@@ -992,11 +998,11 @@ function Payslip() {
     
     const storeTemplate = (templateName) => dispatch({ type: ACTIONS.STORE_TEMPLATE, payload: { ...state.currentTemplate, name: templateName
 } })
-
+console.log(state.templates)
 const openSaveCurrentTemplateModal = () => {
     dispatch({ type: ACTIONS.MODAL_IS_OPEN, payload: true } );
         dispatch({ type: ACTIONS.CURRENT_TEMPLATE, payload: {
-            name: 'Sablon 1',
+            name: '/',
             payer: state.payer,
             paymentDescription: state.paymentDescription,
             receiver: state.receiver,
@@ -1023,7 +1029,9 @@ const openSaveCurrentTemplateModal = () => {
         dispatch({ type: ACTIONS.ALL_TEMPLATES_MODAL_CONTENT, payload: false } )
 };
 
-
+const useTemplate = (template) => {
+    dispatch({ type: ACTIONS.USE_SELECTED_TEMPLATE, payload: template } )
+};
 
     let qrModel = createQrModel(state)
     useEffect(() => {
@@ -1057,7 +1065,7 @@ const openSaveCurrentTemplateModal = () => {
                 />
             )
         } else if (state.allTemplatesModalIsContent) {
-          return (<SavedTemplates templates={state.templates} /> )
+          return (<SavedTemplates templates={state.templates} useTemplate={useTemplate} /> )
         }
     };
 
