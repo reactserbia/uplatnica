@@ -3,16 +3,16 @@ import banksData from '../constants/bankData';
 import S from 'styled-components';
 
 interface BankCardProps {
-   bankNumber: number;
+   bankNumber: string;
    }
 
 const BankCard:React.FC<BankCardProps> = ({bankNumber}) => {
 
-const bankName = banksData[bankNumber]?.name ?? 'Nepostojeća banka';
+const bank = banksData.find((item) => item.bankNumber === bankNumber) ;
 
   return (
   <BankCardWrapper>
-     <BankName>Ovaj račun pripada: {bankName}</BankName>
+     <BankName>Ovaj račun pripada: {bank?.name ?? 'Nepostojeća banka'}</BankName>
   </BankCardWrapper>
    )}
 

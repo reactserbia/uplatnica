@@ -6,7 +6,7 @@
       "sourceMap": true,
       "jsx": "react",
       "strict": true,
-      "allowImportingTsExtensions": true,
+      "moduleResolution": "node",
       "esModuleInterop": true,
       "experimentalDecorators": true,
       "noUnusedLocals": true,

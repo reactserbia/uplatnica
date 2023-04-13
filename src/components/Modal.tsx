@@ -8,9 +8,9 @@ interface ModalProps {
 
 const Modal:React.FC<ModalProps> = ({closeModal, children}) => {
  
- const handleClickOutside = (event) => {
+ const handleClickOutside = (event: MouseEvent) => {
     const target = event.target;
-    if (target.id === 'backdrop') {
+    if (target?.id === 'backdrop') {
         closeModal()
     }
   };
