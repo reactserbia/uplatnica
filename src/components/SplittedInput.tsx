@@ -3,7 +3,12 @@ import InputGroup from './InputGroup.js'
 import S from 'styled-components'
 import { deviceBrakepoints } from '../config/device-brakepoints.js'
 
-const SplittedInput = ({ legend, inputs }) => (
+interface SplittedInputProps {
+    legend: HTMLLegendElement;
+    inputs: HTMLElement;
+}
+
+const SplittedInput:React.FC<SplittedInputProps> = ({ legend, inputs }) => (
     <Container>
         <Legend>{legend}</Legend>
         {inputs.map((input, index) => (

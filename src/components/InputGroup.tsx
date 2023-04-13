@@ -3,10 +3,15 @@ import ErrorMessage from './ErrorMessage.js'
 import S from 'styled-components'
 import { useState } from 'react'
 
+interface InputGroupProps {
+    input: HTMLInputElement;
+    index: ;
+}
+
 const InputGroup = ({ input, index }) => {
     const [focused, setFocused] = useState(false)
 
-    const handleFocus = event => {
+    const handleFocus = (event: React.FocusEventHandler<HTMLInputElement>) => {
         setFocused(true)
         if (input?.appendZeros && event.target.value.length < 13) input.appendZeros(event.target.value)
     }

@@ -1,7 +1,12 @@
 import React from 'react'
 import S from 'styled-components'
 
-const ErrorMessage = ({ id, errorMessage }) => <StyledErrorMessage id={id}>{errorMessage}</StyledErrorMessage>
+interface ErrorMessageProps {
+    id: string;
+    errorMessage: string;
+}
+
+const ErrorMessage:React.FC<ErrorMessageProps> = ({ id, errorMessage }) => <StyledErrorMessage id={id}>{errorMessage}</StyledErrorMessage>
 
 const StyledErrorMessage = S.p`
 display: none;
