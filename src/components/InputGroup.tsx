@@ -2,16 +2,17 @@ import React from 'react'
 import ErrorMessage from './ErrorMessage.js'
 import S from 'styled-components'
 import { useState } from 'react'
+import { InputsProps } from './SplittedInput.js';
 
 interface InputGroupProps {
-    input: HTMLInputElement;
-    index: ;
+    input: InputsProps;
+    index: number;
 }
 
-const InputGroup = ({ input, index }) => {
+const InputGroup:React.FC<InputGroupProps> = ({ input, index }) => {
     const [focused, setFocused] = useState(false)
 
-    const handleFocus = (event: React.FocusEventHandler<HTMLInputElement>) => {
+    const handleFocus = (event: React.FocusEvent) => {
         setFocused(true)
         if (input?.appendZeros && event.target.value.length < 13) input.appendZeros(event.target.value)
     }

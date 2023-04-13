@@ -3,9 +3,21 @@ import InputGroup from './InputGroup.js'
 import S from 'styled-components'
 import { deviceBrakepoints } from '../config/device-brakepoints.js'
 
+export interface InputsProps {
+    type: string;
+    width: number;
+    value: string;
+    pattern: string;
+    required: boolean;
+    errorMessage: string;
+    ariaLabel: string;
+    whenChanged: (e: any) => void;
+    appendZeros?: (v:any) => void;
+}
+
 interface SplittedInputProps {
-    legend: HTMLLegendElement;
-    inputs: HTMLElement;
+    legend: string;
+    inputs: InputsProps[];
 }
 
 const SplittedInput:React.FC<SplittedInputProps> = ({ legend, inputs }) => (
