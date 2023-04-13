@@ -11,6 +11,9 @@ import { useReducer } from 'react'
 import { useLocation } from 'react-router-dom'
 import Modelselect from '../components/Modelselect.jsx'
 import BankCard from '../components/BankCard.jsx'
+import Modal from '../components/Modal.jsx'
+import SavedTemplates from '../components/SavedTemplates.jsx'
+import SaveCurrentTemplate from '../components/SaveCurrentTemplate.jsx'
 
 export const ModelCodeOptions = [
     { value: '97', label: '97' },
@@ -830,7 +833,11 @@ const initialState = {
     controlNumber: '99',
     accountReceivable: '',
     modelCode: ModelCodeOptions[1],
-    paymentNumber: ''
+    paymentNumber: '',
+    currentTemplate: {},
+    modalIsOpen: false,
+    saveCurrentTemplateModalContent: false,
+    allTemplatesModalIsContent: false,
 }
 
 const ACTIONS = {
@@ -845,7 +852,12 @@ const ACTIONS = {
     CONTROL_NUMBER_CHANGE: 'control-number-change',
     MODEL_CODE: 'model-code-change',
     PAYMENT_NUMBER: 'payment-number-change',
-    RESET_VALUES: 'reset-values'
+    RESET_VALUES: 'reset-values',
+    USE_SELECTED_TEMPLATE: 'use-selected-template',
+    CURRENT_TEMPLATE: 'current-template',
+    MODAL_IS_OPEN: 'modal-is-open',
+    SAVE_CURRENT_TEMPLATE_MODAL_CONTENT: 'save-template-modal-is-open',
+    ALL_TEMPLATES_MODAL_CONTENT: 'all-templates-modal-is-open',
 }
 
 const init = () => initialState
@@ -910,6 +922,31 @@ const reducer = (state, action) => {
                 ...state,
                 paymentNumber: action.payload
             }
+        case ACTIONS.CURRENT_TEMPLATE:
+            return {
+                    ...state,
+                    currentTemplate: action.payload,
+                }
+        case ACTIONS.MODAL_IS_OPEN:
+            return {
+                ...state,
+                modalIsOpen: action.payload,
+            }
+        case ACTIONS.SAVE_CURRENT_TEMPLATE_MODAL_CONTENT:
+            return {
+                ...state,
+                saveCurrentTemplateModalContent: action.payload,
+            }
+        case ACTIONS.ALL_TEMPLATES_MODAL_CONTENT:
+            return {
+                ...state,
+                allTemplatesModalIsContent: action.payload,
+            }
+        case ACTIONS.USE_SELECTED_TEMPLATE:
+            return {
+                ...state, 
+                ...action.payload,
+            }
         case ACTIONS.RESET_VALUES:
             return init()
         default:
@@ -951,6 +988,47 @@ function Payslip() {
     const onSetModelCodeChange = event => dispatch({ type: ACTIONS.MODEL_CODE, payload: event })
     const onPaymentNumberChange = event => dispatch({ type: ACTIONS.PAYMENT_NUMBER, payload: event.target.value })
     const resetValues = () => dispatch({ type: ACTIONS.RESET_VALUES })
+    
+    const storeTemplate = (templateName) => {
+        const templates = JSON.parse(localStorage.getItem('templates')) ?? [];
+        const newTemplate = { ...state.currentTemplate, name: templateName}
+        localStorage.setItem('templates', JSON.stringify([...templates, newTemplate]));
+    };
+
+
+const openSaveCurrentTemplateModal = () => {
+    dispatch({ type: ACTIONS.MODAL_IS_OPEN, payload: true } );
+        dispatch({ type: ACTIONS.CURRENT_TEMPLATE, payload: {
+            name: '',
+            payer: state.payer,
+            paymentDescription: state.paymentDescription,
+            receiver: state.receiver,
+            payCode: state.payCode,
+            currencyCode: state.currencyCode,
+            totalAmount: state.totalAmount,
+            bankNumber: state.bankNumber,
+            accountNumber: state.accountNumber,
+            controlNumber: state.accountNumber,
+            accountReceivable: state.accountReceivable,
+            modelCode: state.modelCode,
+            paymentNumber: state.paymentNumber,
+        } })
+        dispatch({ type: ACTIONS.SAVE_CURRENT_TEMPLATE_MODAL_CONTENT, payload: true })
+    };
+    const openAllTemplatesModal = () => {
+        dispatch({ type: ACTIONS.MODAL_IS_OPEN, payload: true } );
+        dispatch({ type: ACTIONS.ALL_TEMPLATES_MODAL_CONTENT, payload: true } )
+    };
+    
+    const closeModal = () => {
+        dispatch({ type: ACTIONS.MODAL_IS_OPEN, payload: false } );
+        dispatch({ type: ACTIONS.SAVE_CURRENT_TEMPLATE_MODAL_CONTENT, payload: false })
+        dispatch({ type: ACTIONS.ALL_TEMPLATES_MODAL_CONTENT, payload: false } )
+};
+
+const useTemplate = (template) => {
+    dispatch({ type: ACTIONS.USE_SELECTED_TEMPLATE, payload: template } )
+};
 
     let qrModel = createQrModel(state)
     useEffect(() => {
@@ -975,28 +1053,40 @@ function Payslip() {
         })
     }, [])
 
+    const whichModalContentToShow = () => {
+        if (state.saveCurrentTemplateModalContent) {
+            return (
+                <SaveCurrentTemplate 
+                    currentTemplate={state.currentTemplate}
+                    storeTemplate={storeTemplate}
+                />
+            )
+        } else if (state.allTemplatesModalIsContent) {
+          return (<SavedTemplates useTemplate={useTemplate} /> )
+        }
+    };
+
     return (
-        <Container>
+        <><Container>
             <BankSlipTitle>Nalog Za Uplatu</BankSlipTitle>
             <LeftSide>
                 <Textarea label='Platilac'
-                          id='payer'
-                          help='payerHelp'
-                          helpText='U ovo polje upišite podatke osobe koja je Platilac.'
-                          value={state.payer} whenChanged={onPayerChange} />
+                    id='payer'
+                    help='payerHelp'
+                    helpText='U ovo polje upišite podatke osobe koja je Platilac.'
+                    value={state.payer} whenChanged={onPayerChange} />
                 <Textarea
                     label='Svrha uplate'
                     id='paymentDescription'
                     help='paymentDescriptionHelp'
                     helpText='U ovo polje upišite svrhu uplate.'
                     value={state.paymentDescription}
-                    whenChanged={onPaymentDescriptionChange}
-                />
+                    whenChanged={onPaymentDescriptionChange} />
                 <Textarea label='Primalac'
-                          id='receiverDescription'
-                          help='receiverDescriptionHelp'
-                          helpText='U ovo polje upišite podatke osobe koja je Primalac.'
-                          value={state.receiver} whenChanged={onReceiverChange} />
+                    id='receiverDescription'
+                    help='receiverDescriptionHelp'
+                    helpText='U ovo polje upišite podatke osobe koja je Primalac.'
+                    value={state.receiver} whenChanged={onReceiverChange} />
             </LeftSide>
             <RightSide>
                 <Modelselect
@@ -1007,8 +1097,7 @@ function Payslip() {
                     helpText='Selektujte šifru uplate.'
                     value={state.payCode}
                     options={PayCodeOptions}
-                    whenChanged={onPayCodeChange}
-                />
+                    whenChanged={onPayCodeChange} />
                 <Input
                     width={23}
                     disabled={true}
@@ -1017,8 +1106,7 @@ function Payslip() {
                     help='valutaHelp'
                     helpText='Ovo polje je onemogućeno jer valuta mora biti RSD.'
                     value={state.currencyCode}
-                    whenChanged={onCurrencyCode}
-                />
+                    whenChanged={onCurrencyCode} />
                 <Input
                     type='number'
                     width={54}
@@ -1027,8 +1115,7 @@ function Payslip() {
                     help='totalAmountHelp'
                     helpText='Ovde upišite brojevima ukupan iznos koji zelite da uplatite.'
                     value={state.totalAmount}
-                    whenChanged={onTotalAmountChange}
-                />
+                    whenChanged={onTotalAmountChange} />
                 <SplittedInput
                     legend='Broj Racuna'
                     inputs={[
@@ -1063,8 +1150,7 @@ function Payslip() {
                             ariaLabel: 'Zadnje dve cifre',
                             whenChanged: onControlNumberChange
                         }
-                    ]}
-                />
+                    ]} />
                 <BankCard bankNumber={state.bankNumber} />
                 <Modelselect
                     width={25}
@@ -1075,8 +1161,7 @@ function Payslip() {
                     large={true}
                     value={state.modelCode}
                     options={ModelCodeOptions}
-                    whenChanged={onSetModelCodeChange}
-                />
+                    whenChanged={onSetModelCodeChange} />
                 <Input
                     type='number'
                     width={75}
@@ -1085,19 +1170,26 @@ function Payslip() {
                     help='paymentNumberHelp'
                     helpText='Ovde upišite brojevima poziv na broj za ovu uplatnicu.'
                     value={state.paymentNumber}
-                    whenChanged={onPaymentNumberChange}
-                />
+                    whenChanged={onPaymentNumberChange} />
                 <QRcodeSVGConainer>
                     <QRCodeSVG size={150} value={qrModel} />
                 </QRcodeSVGConainer>
             </RightSide>
             {/*TODO: Create button component*/}
             <button onClick={resetValues} aria-describedby="cleanButtonHelp">Očisti vrednosti</button>
+            <MidleBtn onClick={openSaveCurrentTemplateModal} aria-describedby="saveTemplateButtonHelp">Sačuvaj šablon</MidleBtn>
+            <button onClick={openAllTemplatesModal} aria-describedby="savedTemplatesButtonHelp">Svi šabloni</button>
             <div hidden id="cleanButtonHelp">
                 Ovo dugme vraća sve na početne vrednosti.
             </div>
-
-        </Container>
+        </Container>{
+        state.modalIsOpen && 
+        <Modal 
+        closeModal={closeModal}
+        >
+           {whichModalContentToShow()}
+        </Modal>
+        }</>
     )
 }
 
@@ -1151,6 +1243,9 @@ const RightSide = styled.div`
         flex-direction: column;
         width: 100%;
     }
+`
+const MidleBtn = styled.button`
+    margin: 0 0.7rem;
 `
 const QRcodeSVGConainer = styled.div`
     @media ${deviceBrakepoints.mobile} {
