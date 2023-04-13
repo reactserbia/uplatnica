@@ -1,4 +1,5 @@
 import React from 'react'
+import { Theme } from 'react-select';
 import Label from './Label.js'
 import S from 'styled-components'
 import Select from 'react-select'
@@ -30,21 +31,24 @@ const ModelselectStyles = {
     })
 }
 
-const theme = theme => ({
-    ...theme,
-    colors: {
+  const customTheme = (theme: Theme) => {
+    const newTheme = {
+      ...theme,
+      colors: {
         ...theme.colors,
         primary: 'gray',
         primary75: 'gray',
         primary50: 'gray',
-        primary25: 'gray'
-    },
-    spacing: {
+        primary25: 'gray',
+      },
+      spacing: {
         ...theme.spacing,
         controlHeight: 14,
-        baseUnit: 0.55
-    }
-})
+        baseUnit: 0.55,
+      },
+    };
+    return newTheme;
+  };
 
 interface ModelselectProps {
     width: number;
@@ -56,8 +60,6 @@ interface ModelselectProps {
     whenChanged: (e:any) => void;
     options: PayCodeOptionsType[] | ModelCodeOptionsType[];
 }
-
-
 
 const Modelselect:React.FC<ModelselectProps> = ({ width, placeholder, helpId, helpText, label, value, whenChanged, options }) => {
 
@@ -71,7 +73,7 @@ const Modelselect:React.FC<ModelselectProps> = ({ width, placeholder, helpId, he
             aria-labelledby={helpId}
             options={options}
             styles={ModelselectStyles}
-            theme={theme}
+            theme={customTheme}
             defaultValue={value}
             value={value}
             onChange={whenChanged}
