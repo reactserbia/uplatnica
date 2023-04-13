@@ -13,7 +13,8 @@ const SaveCurrentTemplate:React.FC<SaveCurrentTemplateProps> = ({storeTemplate,c
     const [templateName, setTemplateName] = useState('');
 
     const saveTemplate = () => {
-        const templates: CurrentTemplate[] | null = JSON.parse(localStorage.getItem('templates')) ?? [];
+        const pullTemplates = localStorage.getItem('templates');
+        const templates = pullTemplates !== null ? JSON.parse(pullTemplates) : [];
 
         const isDuplicatesTemplates = templates !== null && templates.find((item: CurrentTemplate) => item.name === templateName);
         if (isDuplicatesTemplates === undefined) {

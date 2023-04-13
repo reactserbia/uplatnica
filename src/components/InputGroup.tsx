@@ -12,7 +12,7 @@ interface InputGroupProps {
 const InputGroup:React.FC<InputGroupProps> = ({ input, index }) => {
     const [focused, setFocused] = useState(false)
 
-    const handleFocus = (event: React.FocusEvent) => {
+    const handleFocus = (event: React.FocusEvent<HTMLInputElement>) => {
         setFocused(true)
         if (input?.appendZeros && event.target.value.length < 13) input.appendZeros(event.target.value)
     }

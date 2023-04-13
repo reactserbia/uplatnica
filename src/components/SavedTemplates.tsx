@@ -10,8 +10,9 @@ const SavedTemplates:React.FC<SavedTemplatesProps> = ({useTemplate}) => {
   const[clearallTemplatedMsg, setClearedAllTemplatesMsg] = useState('');
   const[templatedIsUsedMsg, setTemplateIsUsedMsg] = useState('');
 
-  const templates = JSON.parse(localStorage.getItem('templates')) ?? [];
-
+  const pullTemplates = localStorage.getItem('templates');
+  const templates = pullTemplates !== null ? JSON.parse(pullTemplates) : [];
+ console.log(templates);
   const handleUseTemplate = (template: CurrentTemplate) => {
     useTemplate(template);
     setTemplateIsUsedMsg('Šablon je upotrebljen');

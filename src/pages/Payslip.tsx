@@ -1028,7 +1028,8 @@ function Payslip() {
     const resetValues = () => dispatch({ type: ACTIONS.RESET_VALUES })
     
     const storeTemplate = (templateName: any) => {
-        const templates = JSON.parse(localStorage.getItem('templates')) ?? [];
+        const pullTemplates = localStorage.getItem('templates');
+        const templates = pullTemplates !== null ? JSON.parse(pullTemplates) : [];
         const newTemplate = { ...state.currentTemplate, name: templateName}
         localStorage.setItem('templates', JSON.stringify([...templates, newTemplate]));
     };
