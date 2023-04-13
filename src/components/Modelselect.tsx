@@ -1,35 +1,47 @@
 import React from 'react'
-import { Theme } from 'react-select';
+import { Theme, StylesConfig} from 'react-select';
 import Label from './Label.js'
 import S from 'styled-components'
 import Select from 'react-select'
 import { ModelCodeOptionsType, PayCodeOptionsType } from '../pages/Payslip'
 
-const ModelselectStyles = {
-    control: (styles: any) => ({
-        ...styles,
-        borderRadius: '0',
-        backgroundColor: 'lightgrey',
-        borderColor: 'white',
-        borderWidth: '3px',
-        boxShadow: 'none',
-        top: '-1px'
+interface OptionType {
+    label: string;
+    value: string;
+  }
+  
+  interface ModelSelectStyles extends StylesConfig<OptionType, false> {
+    control: StylesConfig<OptionType, false>['control'];
+    menu: StylesConfig<OptionType, false>['menu'];
+    menuList: StylesConfig<OptionType, false>['menuList'];
+    option: StylesConfig<OptionType, false>['option'];
+  }
+  
+  const ModelselectStyles: ModelSelectStyles = {
+    control: (styles) => ({
+      ...styles,
+      borderRadius: '0',
+      backgroundColor: 'lightgrey',
+      borderColor: 'white',
+      borderWidth: '3px',
+      boxShadow: 'none',
+      top: '-1px',
     }),
-    menu: (styles: any) => ({
-        ...styles,
-        white: '200px'
+    menu: (styles) => ({
+      ...styles,
+      white: '200px',
     }),
-    menuList: (styles: any) => ({
-        ...styles,
-        background: 'white',
-        color: 'lightgray'
+    menuList: (styles) => ({
+      ...styles,
+      background: 'white',
+      color: 'lightgray',
     }),
-    option: (styles: any, { isFocused, isSelected }: any) => ({
-        ...styles,
-        background: isFocused ? 'gray' : isSelected ? 'lightgrey' : 'undefined',
-        zIndex: 1
-    })
-}
+    option: (styles, { isFocused, isSelected }) => ({
+      ...styles,
+      background: isFocused ? 'gray' : isSelected ? 'lightgrey' : 'undefined',
+      zIndex: 1,
+    }),
+  };
 
   const customTheme = (theme: Theme) => {
     const newTheme = {
