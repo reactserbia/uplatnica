@@ -1,10 +1,10 @@
+import React from 'react'
 import S from 'styled-components'
-
 import Label from './Label'
 
 const Textarea = ({ label, id, help, helpText, value, whenChanged }) => (
     <Container>
-        <Label label={label} for={id}/>
+        <Label label={label} forId={id}/>
         <StyledTextarea name={id} id={id} aria-describedby={help} value={value} onChange={whenChanged} />
         <span hidden id={help}>{helpText}</span>
     </Container>

@@ -1,6 +1,7 @@
-import InputGroup from './InputGroup.jsx'
+import React from 'react'
+import InputGroup from './InputGroup.js'
 import S from 'styled-components'
-import { deviceBrakepoints } from '@config/device-brakepoints.jsx'
+import { deviceBrakepoints } from '../config/device-brakepoints.js'
 
 const SplittedInput = ({ legend, inputs }) => (
     <Container>

@@ -1,6 +1,12 @@
+import React from 'react'
 import S from 'styled-components'
 
-const Label = ({ label }) => <StyledLabel htmlFor={label}>{label}</StyledLabel>
+interface LabelProps {
+label: string;
+forId?: string;
+}
+
+const Label:React.FC<LabelProps> = ({ label, forId }) => <StyledLabel htmlFor={forId}>{label}</StyledLabel>
 
 const StyledLabel = S.label`
     display: block;

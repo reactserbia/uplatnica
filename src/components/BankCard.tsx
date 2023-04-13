@@ -1,7 +1,12 @@
+import React from 'react';
 import banksData from '../constants/bankData';
 import S from 'styled-components';
 
-function BankCard({bankNumber}) {
+interface BankCardProps {
+   bankNumber: number;
+   }
+
+const BankCard:React.FC<BankCardProps> = ({bankNumber}) => {
 
 const bankName = banksData[bankNumber]?.name ?? 'Nepostojeća banka';
 

@@ -1,7 +1,12 @@
 import React, { useEffect } from 'react'
 import S from 'styled-components';
 
-const Modal = ({closeModal, children}) => {
+interface ModalProps {
+  closeModal: () => void;
+  children: React.ReactNode;
+}
+
+const Modal:React.FC<ModalProps> = ({closeModal, children}) => {
  
  const handleClickOutside = (event) => {
     const target = event.target;

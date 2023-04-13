@@ -1,19 +1,25 @@
+import React from 'react'
+import { useReducer } from 'react'
 import { useEffect } from 'react'
+
+import { useLocation } from 'react-router-dom'
+import Modelselect from '../components/Modelselect'
+import BankCard from '../components/BankCard'
+import Modal from '../components/Modal'
+import SavedTemplates from '../components/SavedTemplates'
+import SaveCurrentTemplate from '../components/SaveCurrentTemplate'
+import { createQrModel } from '../utils/qrModelUtils'
+import { QRCodeSVG } from 'qrcode.react'
+import Input from '../components/Input'
+import SplittedInput from '../components/SplittedInput'
+import Textarea from '../components/Textarea'
+import { deviceBrakepoints } from '../config/device-brakepoints'
 import styled from 'styled-components'
 
-import Input from '@components/Input.jsx'
-import SplittedInput from '@components/SplittedInput.jsx'
-import { QRCodeSVG } from 'qrcode.react'
-import Textarea from '@components/Textarea.jsx'
-import { createQrModel } from '@utils/qrModelUtils'
-import { deviceBrakepoints } from '@config/device-brakepoints.jsx'
-import { useReducer } from 'react'
-import { useLocation } from 'react-router-dom'
-import Modelselect from '../components/Modelselect.jsx'
-import BankCard from '../components/BankCard.jsx'
-import Modal from '../components/Modal.jsx'
-import SavedTemplates from '../components/SavedTemplates.jsx'
-import SaveCurrentTemplate from '../components/SaveCurrentTemplate.jsx'
+interface ModelCodeOptions {
+    value: string;
+    label: string;
+}
 
 export const ModelCodeOptions = [
     { value: '97', label: '97' },
@@ -21,6 +27,10 @@ export const ModelCodeOptions = [
     { value: '00', label: '00' }
 ]
 
+export interface PayCodeOptions {
+    value: number | string;
+    label: string;
+}
 //TODO: change value param to string or vice versa
 export const PayCodeOptions = [
     {
@@ -821,6 +831,29 @@ export const PayCodeOptions = [
     }
 ]
 
+interface InitialState {
+    payer: string;
+    paymentDescription:  string;
+    receiver:  string;
+    payCode: PayCodeOptions,
+    currencyCode:  string;
+    totalAmount:  string;
+    bankNumber:  string;
+    accountNumber:  string;
+    controlNumber:  string;
+    accountReceivable:  string;
+    modelCode: ModelCodeOptions;
+    paymentNumber:  string;
+    currentTemplate: CurrentTemplate;
+    modalIsOpen: boolean;
+    saveCurrentTemplateModalContent: boolean;
+    allTemplatesModalIsContent: boolean;
+}
+
+export interface CurrentTemplate extends InitialState {
+    name: string;
+}
+
 const initialState = {
     payer: '',
     paymentDescription: '',
@@ -838,6 +871,11 @@ const initialState = {
     modalIsOpen: false,
     saveCurrentTemplateModalContent: false,
     allTemplatesModalIsContent: false,
+}
+
+interface Actions {
+    type: string;
+    payload?: any;
 }
 
 const ACTIONS = {
@@ -862,7 +900,7 @@ const ACTIONS = {
 
 const init = () => initialState
 
-const reducer = (state, action) => {
+const reducer = (state: InitialState, action: Actions) => {
     switch (action.type) {
         case ACTIONS.PAYER_CHANGED:
             return {
@@ -959,37 +997,37 @@ function Payslip() {
     const [state, dispatch] = useReducer(reducer, initialState, init)
     const params = new URLSearchParams(useLocation().search)
 
-    const onPayerChange = event => dispatch({ type: ACTIONS.PAYER_CHANGED, payload: event.target.value })
-    const onPaymentDescriptionChange = event => dispatch({ type: ACTIONS.PAYMENT_DESCRIPTION, payload: event.target.value })
-    const onReceiverChange = event => dispatch({ type: ACTIONS.RECEIVER_CHANGED, payload: event.target.value })
-    const onPayCodeChange = event => dispatch({ type: ACTIONS.PAYCODE_CHANGED, payload: event })
-    const onCurrencyCode = event => dispatch({ type: ACTIONS.CURRENCY_CHANGED, payload: event.target.value })
-    const onTotalAmountChange = event => dispatch({ type: ACTIONS.TOTAL_AMOUNT, payload: event.target.value })
+    const onPayerChange = (event: { target: { value: any } }) => dispatch({ type: ACTIONS.PAYER_CHANGED, payload: event.target.value })
+    const onPaymentDescriptionChange = (event: { target: { value: any } }) => dispatch({ type: ACTIONS.PAYMENT_DESCRIPTION, payload: event.target.value })
+    const onReceiverChange = (event: { target: { value: any } }) => dispatch({ type: ACTIONS.RECEIVER_CHANGED, payload: event.target.value })
+    const onPayCodeChange = (event: any) => dispatch({ type: ACTIONS.PAYCODE_CHANGED, payload: event })
+    const onCurrencyCode = (event: { target: { value: any } }) => dispatch({ type: ACTIONS.CURRENCY_CHANGED, payload: event.target.value })
+    const onTotalAmountChange = (event: { target: { value: any } }) => dispatch({ type: ACTIONS.TOTAL_AMOUNT, payload: event.target.value })
 
-    const appendZeros = value => {
+    const appendZeros = (value: any) => {
         let newValue = value
         while (newValue.length < 13) newValue = '0' + newValue
         dispatch({ type: ACTIONS.ACCOUNT_NUMBER_CHANGE, payload: newValue })
     }
-    const onFixBankNumberChange = event => {
+    const onFixBankNumberChange = (event: { target: { value: string } }) => {
         if (/^[1-9]{0,1}[0-9]{0,2}$/.test(event.target.value))
             dispatch({ type: ACTIONS.BANK_NUMBER_CHANGE, payload: event.target.value })
     }
-    const onAccountNumberChange = event => {
+    const onAccountNumberChange = (event: { target: { value: string } }) => {
         if (/^[0-9]{0,13}$/.test(event.target.value)) {
             dispatch({ type: ACTIONS.ACCOUNT_NUMBER_CHANGE, payload: event.target.value })
         }
     }
-    const onControlNumberChange = event => {
+    const onControlNumberChange = (event: { target: { value: string } }) => {
         if (/^[1-9]{0,1}[0-9]{0,1}$/.test(event.target.value))
             dispatch({ type: ACTIONS.CONTROL_NUMBER_CHANGE, payload: event.target.value })
     }
 
-    const onSetModelCodeChange = event => dispatch({ type: ACTIONS.MODEL_CODE, payload: event })
-    const onPaymentNumberChange = event => dispatch({ type: ACTIONS.PAYMENT_NUMBER, payload: event.target.value })
+    const onSetModelCodeChange = (event: { value: string; label: string }) => dispatch({ type: ACTIONS.MODEL_CODE, payload: event })
+    const onPaymentNumberChange = (event: { target: { value: any } }) => dispatch({ type: ACTIONS.PAYMENT_NUMBER, payload: event.target.value })
     const resetValues = () => dispatch({ type: ACTIONS.RESET_VALUES })
     
-    const storeTemplate = (templateName) => {
+    const storeTemplate = (templateName: any) => {
         const templates = JSON.parse(localStorage.getItem('templates')) ?? [];
         const newTemplate = { ...state.currentTemplate, name: templateName}
         localStorage.setItem('templates', JSON.stringify([...templates, newTemplate]));
@@ -1026,7 +1064,7 @@ const openSaveCurrentTemplateModal = () => {
         dispatch({ type: ACTIONS.ALL_TEMPLATES_MODAL_CONTENT, payload: false } )
 };
 
-const useTemplate = (template) => {
+const useTemplate = (template: CurrentTemplate) => {
     dispatch({ type: ACTIONS.USE_SELECTED_TEMPLATE, payload: template } )
 };
 
@@ -1037,7 +1075,7 @@ const useTemplate = (template) => {
         const modelCode = params.get('modelCode')
 
         if (modelCode) {
-            for (let i = 0; i < options.length; i++) {
+            for (let i = 0; i < Option.length; i++) {
                 if (ModelCodeOptions[i].value === modelCode) {
                     onSetModelCodeChange(ModelCodeOptions[i])
                     console.log('ARE EQUAL')
@@ -1158,7 +1196,7 @@ const useTemplate = (template) => {
                     placeholder='Izaberi'
                     helpId='modelCodeHelp'
                     helpText='Selektujte model uplate.'
-                    large={true}
+                   // large={true}
                     value={state.modelCode}
                     options={ModelCodeOptions}
                     whenChanged={onSetModelCodeChange} />

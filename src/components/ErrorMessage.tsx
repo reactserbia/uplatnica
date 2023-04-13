@@ -1,3 +1,4 @@
+import React from 'react'
 import S from 'styled-components'
 
 const ErrorMessage = ({ id, errorMessage }) => <StyledErrorMessage id={id}>{errorMessage}</StyledErrorMessage>

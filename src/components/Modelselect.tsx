@@ -1,9 +1,11 @@
-import Label from './Label.jsx'
+import React from 'react'
+import Label from './Label.js'
 import S from 'styled-components'
 import Select from 'react-select'
+import { PayCodeOptions } from '../pages/Payslip'
 
 const ModelselectStyles = {
-    control: styles => ({
+    control: (styles: any) => ({
         ...styles,
         borderRadius: '0',
         backgroundColor: 'lightgrey',
@@ -12,16 +14,16 @@ const ModelselectStyles = {
         boxShadow: 'none',
         top: '-1px'
     }),
-    menu: styles => ({
+    menu: (styles: any) => ({
         ...styles,
         white: '200px'
     }),
-    menuList: styles => ({
+    menuList: (styles: any) => ({
         ...styles,
         background: 'white',
         color: 'lightgray'
     }),
-    option: (styles, { isFocused, isSelected }) => ({
+    option: (styles: any, { isFocused, isSelected }: any) => ({
         ...styles,
         background: isFocused ? 'gray' : isSelected ? 'lightgrey' : 'undefined',
         zIndex: 1
@@ -44,7 +46,19 @@ const theme = theme => ({
     }
 })
 
-const Modelselect = ({ width, placeholder, helpId, helpText, label, value, whenChanged, options }) => (
+interface ModelselectProps {
+    width: number;
+    placeholder: string;
+    helpId: string;
+    helpText:string;
+    label: string;
+    value: string;
+    whenChanged: (e:any) => void;
+    options: {label:string, value: string}[];
+}
+
+
+const Modelselect:React.FC<ModelselectProps> = ({ width, placeholder, helpId, helpText, label, value, whenChanged, options }) => (
     <Container width={width}>
         <Label label={label} />
         <Select
@@ -62,7 +76,11 @@ const Modelselect = ({ width, placeholder, helpId, helpText, label, value, whenC
     </Container>
 )
 
-const Container = S.div`
+interface ContainerProps {
+    width: number;
+ };
+
+const Container = S.div<ContainerProps>`
    display: inline-block;
    text-align: left;
    margin-bottom: 7px;
