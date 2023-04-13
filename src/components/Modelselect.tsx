@@ -2,7 +2,7 @@ import React from 'react'
 import Label from './Label.js'
 import S from 'styled-components'
 import Select from 'react-select'
-import { PayCodeOptions } from '../pages/Payslip'
+import { ModelCodeOptionsType, PayCodeOptionsType } from '../pages/Payslip'
 
 const ModelselectStyles = {
     control: (styles: any) => ({
@@ -54,11 +54,15 @@ interface ModelselectProps {
     label: string;
     value: string;
     whenChanged: (e:any) => void;
-    options: {label:string, value: string}[];
+    options: PayCodeOptionsType[] | ModelCodeOptionsType[];
 }
 
 
-const Modelselect:React.FC<ModelselectProps> = ({ width, placeholder, helpId, helpText, label, value, whenChanged, options }) => (
+
+const Modelselect:React.FC<ModelselectProps> = ({ width, placeholder, helpId, helpText, label, value, whenChanged, options }) => {
+
+    console.log(typeof options)
+    return (
     <Container width={width}>
         <Label label={label} />
         <Select
@@ -71,10 +75,10 @@ const Modelselect:React.FC<ModelselectProps> = ({ width, placeholder, helpId, he
             defaultValue={value}
             value={value}
             onChange={whenChanged}
-        />
+            />
         <span hidden id={helpId}>{helpText}</span>
     </Container>
-)
+)}
 
 interface ContainerProps {
     width: number;

@@ -16,7 +16,7 @@ import Textarea from '../components/Textarea'
 import { deviceBrakepoints } from '../config/device-brakepoints'
 import styled from 'styled-components'
 
-interface ModelCodeOptions {
+export interface ModelCodeOptionsType {
     value: string;
     label: string;
 }
@@ -27,12 +27,12 @@ export const ModelCodeOptions = [
     { value: '00', label: '00' }
 ]
 
-export interface PayCodeOptions {
+export interface PayCodeOptionsType {
     value: number | string;
     label: string;
 }
 //TODO: change value param to string or vice versa
-export const PayCodeOptions = [
+ export const PayCodeOptions:PayCodeOptionsType[] = [
     {
         value: 20,
         label: 'Prоmеt rоbе i uslugа – mеđufаznа pоtrоšnjа'
@@ -835,14 +835,14 @@ interface InitialState {
     payer: string;
     paymentDescription:  string;
     receiver:  string;
-    payCode: PayCodeOptions,
+    payCode: PayCodeOptionsType,
     currencyCode:  string;
     totalAmount:  string;
     bankNumber:  string;
     accountNumber:  string;
     controlNumber:  string;
     accountReceivable:  string;
-    modelCode: ModelCodeOptions;
+    modelCode: ModelCodeOptionsType;
     paymentNumber:  string;
     currentTemplate: CurrentTemplate;
     modalIsOpen: boolean;
@@ -1084,11 +1084,6 @@ const useTemplate = (template: CurrentTemplate) => {
             }
         }
 
-        console.table({
-            accountNumber,
-            amount,
-            modelCode
-        })
     }, [])
 
     const whichModalContentToShow = () => {
