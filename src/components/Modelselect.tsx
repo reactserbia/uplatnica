@@ -1,66 +1,50 @@
-import React from 'react'
-import { Theme, StylesConfig} from 'react-select';
-import Label from './Label.js'
+import Label from './Label.jsx'
 import S from 'styled-components'
 import Select from 'react-select'
-import { ModelCodeOptionsType, PayCodeOptionsType } from '../pages/Payslip'
+import { ModelCodeOptionsType, PayCodeOptionsType } from '../pages/Payslip.js'
+import React from 'react'
 
-interface OptionType {
-    label: string;
-    value: string;
-  }
-  
-  interface ModelSelectStyles extends StylesConfig<OptionType, false> {
-    control: StylesConfig<OptionType, false>['control'];
-    menu: StylesConfig<OptionType, false>['menu'];
-    menuList: StylesConfig<OptionType, false>['menuList'];
-    option: StylesConfig<OptionType, false>['option'];
-  }
-  
-  const ModelselectStyles: ModelSelectStyles = {
-    control: (styles) => ({
-      ...styles,
-      borderRadius: '0',
-      backgroundColor: 'lightgrey',
-      borderColor: 'white',
-      borderWidth: '3px',
-      boxShadow: 'none',
-      top: '-1px',
+const ModelselectStyles = {
+    control: (styles: any) => ({
+        ...styles,
+        borderRadius: '0',
+        backgroundColor: 'lightgrey',
+        borderColor: 'white',
+        borderWidth: '3px',
+        boxShadow: 'none',
+        top: '-1px'
     }),
-    menu: (styles) => ({
-      ...styles,
-      white: '200px',
+    menu: (styles: any) => ({
+        ...styles,
+        white: '200px'
     }),
-    menuList: (styles) => ({
-      ...styles,
-      background: 'white',
-      color: 'lightgray',
+    menuList: (styles: any) => ({
+        ...styles,
+        background: 'white',
+        color: 'lightgray'
     }),
-    option: (styles, { isFocused, isSelected }) => ({
-      ...styles,
-      background: isFocused ? 'gray' : isSelected ? 'lightgrey' : 'undefined',
-      zIndex: 1,
-    }),
-  };
+    option: (styles: any, { isFocused, isSelected }: any) => ({
+        ...styles,
+        background: isFocused ? 'gray' : isSelected ? 'lightgrey' : 'undefined',
+        zIndex: 1
+    })
+}
 
-  const customTheme = (theme: Theme) => {
-    const newTheme = {
-      ...theme,
-      colors: {
+const theme = (theme: { colors: any; spacing: any }) => ({
+    ...theme,
+    colors: {
         ...theme.colors,
         primary: 'gray',
         primary75: 'gray',
         primary50: 'gray',
-        primary25: 'gray',
-      },
-      spacing: {
+        primary25: 'gray'
+    },
+    spacing: {
         ...theme.spacing,
         controlHeight: 14,
-        baseUnit: 0.55,
-      },
-    };
-    return newTheme;
-  };
+        baseUnit: 0.55
+    }
+})
 
 interface ModelselectProps {
     width: number;
@@ -73,10 +57,9 @@ interface ModelselectProps {
     options: PayCodeOptionsType[] | ModelCodeOptionsType[];
 }
 
-const Modelselect:React.FC<ModelselectProps> = ({ width, placeholder, helpId, helpText, label, value, whenChanged, options }) => {
 
-    console.log(typeof options)
-    return (
+
+const Modelselect:React.FC<ModelselectProps> = ({ width, placeholder, helpId, helpText, label, value, whenChanged, options }) => (
     <Container width={width}>
         <Label label={label} />
         <Select
@@ -85,15 +68,14 @@ const Modelselect:React.FC<ModelselectProps> = ({ width, placeholder, helpId, he
             aria-labelledby={helpId}
             options={options}
             styles={ModelselectStyles}
-            theme={customTheme}
+            theme={theme}
             defaultValue={value}
             value={value}
             onChange={whenChanged}
-            />
+        />
         <span hidden id={helpId}>{helpText}</span>
     </Container>
-)}
-
+)
 interface ContainerProps {
     width: number;
  };
