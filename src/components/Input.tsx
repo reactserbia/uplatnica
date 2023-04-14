@@ -12,7 +12,7 @@ interface InputProps {
    width: number;
    label: string;
    value: string | number; 
-   whenChanged: (e:any) => void;
+   whenChanged: (e:React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 const Input:React.FC<InputProps> = ({ type = 'text', id, help, helpText, disabled, width, label, value, whenChanged }) => (
