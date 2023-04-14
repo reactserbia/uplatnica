@@ -1,8 +1,8 @@
 import React from 'react'
-import ErrorMessage from './ErrorMessage.ts'
+import ErrorMessage from './ErrorMessage'
 import S from 'styled-components'
 import { useState } from 'react'
-import { InputsProps } from './SplittedInput.ts';
+import { InputsProps } from './SplittedInput';
 
 interface InputGroupProps {
     input: InputsProps;
