@@ -1202,14 +1202,14 @@ const useTemplate = (template: CurrentTemplate) => {
                     <QRCodeSVG size={150} value={qrModel} />
                 </QRcodeSVGConainer>
             </RightSide>
+        </Container>
             {/*TODO: Create button component*/}
             <button onClick={resetValues} aria-describedby="cleanButtonHelp">Očisti vrednosti</button>
             <MidleBtn onClick={openSaveCurrentTemplateModal} aria-describedby="saveTemplateButtonHelp">Sačuvaj šablon</MidleBtn>
             <button onClick={openAllTemplatesModal} aria-describedby="savedTemplatesButtonHelp">Svi šabloni</button>
             <div hidden id="cleanButtonHelp">
                 Ovo dugme vraća sve na početne vrednosti.
-            </div>
-        </Container>{
+            </div>{
         state.modalIsOpen && 
         <Modal 
         closeModal={closeModal}
@@ -1229,6 +1229,7 @@ const Container = styled.div`
     font-size: 3mm;
     border: solid 1px var(--color-primary);
     padding: 6mm;
+    margin-bottom: 1em;
     @media ${deviceBrakepoints.desktop} {
         &::before {
             border-right: solid 1px var(--color-primary);

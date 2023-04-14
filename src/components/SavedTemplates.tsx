@@ -47,7 +47,7 @@ const SavedTemplates:React.FC<SavedTemplatesProps> = ({useTemplate}) => {
 }
 
 const TemplateListWrapper = S.div
-` background-color: rgb(232,238,244);
+` background-color: rgb(44 47 49);
  width:100%;
  margin-top: 1rem;
  padding: 0.5rem;
