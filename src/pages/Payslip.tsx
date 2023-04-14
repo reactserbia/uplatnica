@@ -15,11 +15,7 @@ import SplittedInput from '../components/SplittedInput'
 import Textarea from '../components/Textarea'
 import { deviceBrakepoints } from '../config/device-brakepoints'
 import styled from 'styled-components'
-
-export interface ModelCodeOptionsType {
-    value: string;
-    label: string;
-}
+import { ModelCodeOptionsType, PayCodeOptionsType } from '../constants/type'
 
 export const ModelCodeOptions = [
     { value: '97', label: '97' },
@@ -27,10 +23,7 @@ export const ModelCodeOptions = [
     { value: '00', label: '00' }
 ]
 
-export interface PayCodeOptionsType {
-    value: number | string;
-    label: string;
-}
+
 //TODO: change value param to string or vice versa
  export const PayCodeOptions:PayCodeOptionsType[] = [
     {
