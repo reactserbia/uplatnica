@@ -52,7 +52,7 @@ const Content = S.div
  display: flex;
  flex-direction: column;
  align-items: flex-start;
- background-color: #242424;
+ background-color: white;
  padding: 1rem;
  text-align:start;
  overflow: auto;
