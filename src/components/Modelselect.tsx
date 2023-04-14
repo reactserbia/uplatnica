@@ -1,8 +1,8 @@
-import Label from './Label.jsx'
+import Label from './Label.tsx'
 import S from 'styled-components'
 import Select from 'react-select'
 import React from 'react'
-import { ModelCodeOptionsType, PayCodeOptionsType } from '../constants/type.js'
+import { ModelCodeOptionsType, PayCodeOptionsType } from '../constants/type.ts'
 
 const ModelselectStyles = {
     control: (styles: any) => ({

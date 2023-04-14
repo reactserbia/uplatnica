@@ -11,7 +11,9 @@
       "noUnusedLocals": true,
       "noUnusedParameters": true,
       "noImplicitReturns": true,
-      "noFallthroughCasesInSwitch": true
+      "noEmit": true,
+      "noFallthroughCasesInSwitch": true,
+      "allowImportingTsExtensions": true,
     },
     "include": ["src/**/*"],
     "exclude": ["node_modules", "**/*.spec.ts"]

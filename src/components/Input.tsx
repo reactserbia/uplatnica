@@ -1,6 +1,6 @@
 import React from 'react';
 import { deviceBrakepoints } from '../config/device-brakepoints'
-import Label from './Label.jsx'
+import Label from './Label'
 import S from 'styled-components'
 
 interface InputProps {

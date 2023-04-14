@@ -1,7 +1,7 @@
 import React from 'react'
-import InputGroup from './InputGroup.js'
+import InputGroup from './InputGroup.tsx'
 import S from 'styled-components'
-import { deviceBrakepoints } from '../config/device-brakepoints.js'
+import { deviceBrakepoints } from '../config/device-brakepoints.ts'
 
 export interface InputsProps {
     type: string;
