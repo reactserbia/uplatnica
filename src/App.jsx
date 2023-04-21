@@ -18,6 +18,9 @@ const GlobalStyles = createGlobalStyle`
         box-sizing: border-box;
         padding: 0;
         margin: 0;
+        -webkit-print-color-adjust:exact !important;
+        print-color-adjust:exact !important;
+        color-adjust: exact !important;
     }
     body, h1, h2, h3, h4, p, figure, blockquote, dl, dd { margin: 0; }
     ul[role='list'], ol[role='list'] { list-style: none; }
@@ -33,6 +36,12 @@ const GlobalStyles = createGlobalStyle`
         max-width: 100%;
     }
     input, button, textarea, select { font: inherit; }
+    
+    @page { 
+        size: tabloid landscape;
+        margin: 0; 
+    }
+
     @media (prefers-reduced-motion: reduce) {
         html:focus-within { scroll-behavior: auto; }
         
