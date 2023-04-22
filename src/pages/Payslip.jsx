@@ -1042,14 +1042,15 @@ function Payslip() {
         const modelCode = params.get('modelCode')
 
         if (modelCode) {
-            for (let i = 0; i < options.length; i++) {
-                if (ModelCodeOptions[i].value === modelCode) {
-                    onSetModelCodeChange(ModelCodeOptions[i])
-                    console.log('ARE EQUAL')
-                    break
-                }
+            const foundOption = options.find(option => option.value === modelCode);
+
+            if (foundOption) {
+                onSetModelCodeChange(foundOption);
+                console.log('ARE EQUAL');
             }
         }
+
+
 
         console.table({
             accountNumber,
