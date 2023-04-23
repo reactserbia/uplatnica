@@ -379,21 +379,22 @@ function Payslip() {
                 </QRcodeSVGConainer>
             </RightSide>
         </Container>
-            {/*TODO: Create button component*/}
-            <Button onClick={resetValues} aria-describedby="cleanButtonHelp">Očisti vrednosti</Button>
-            <Button type="button" onClick={printPayslip}>Odstampaj uplatnicu</Button>
-            <MidleBtn onClick={openSaveCurrentTemplateModal} aria-describedby="saveTemplateButtonHelp">Sačuvaj šablon</MidleBtn>
-            <Button onClick={openAllTemplatesModal} aria-describedby="savedTemplatesButtonHelp">Svi šabloni</Button>
-            <div hidden id="cleanButtonHelp">
-                Ovo dugme vraća sve na početne vrednosti.
-            </div>{
-                state.modalIsOpen &&
-                <Modal
-                    closeModal={closeModal}
-                >
-                    {whichModalContentToShow()}
-                </Modal>
-            }</>
+            <ButtonsGrid>
+                <Button onClick={resetValues} aria-describedby="cleanButtonHelp">Očisti vrednosti</Button>
+                <Button onClick={printPayslip}>Odstampaj uplatnicu</Button>
+                <Button onClick={openSaveCurrentTemplateModal} aria-describedby="saveTemplateButtonHelp">Sačuvaj šablon</Button>
+                <Button onClick={openAllTemplatesModal} aria-describedby="savedTemplatesButtonHelp">Svi šabloni</Button>
+            </ButtonsGrid>
+                <div hidden id="cleanButtonHelp">
+                    Ovo dugme vraća sve na početne vrednosti.
+                </div>{
+                    state.modalIsOpen &&
+                    <Modal
+                        closeModal={closeModal}
+                    >
+                        {whichModalContentToShow()}
+                    </Modal>
+                }</>
     )
 }
 
@@ -449,12 +450,7 @@ const RightSide = styled.div`
         width: 100%;
     }
 `
-const MidleBtn = styled.button`
-    margin: 0 0.7rem;
-    @media print {
-        display: none;
-    }
-`
+
 const QRcodeSVGConainer = styled.div`
     @media ${deviceBrakepoints.mobile} {
         margin: 5px auto;
@@ -466,5 +462,16 @@ const Button = styled.button`
         display: none;
     }
 `
+
+const ButtonsGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0.7rem;
+  margin-top: 1rem;
+
+  @media ${deviceBrakepoints.mobile} {
+    grid-template-columns: 1fr;
+  }
+`;
 
 export default Payslip
