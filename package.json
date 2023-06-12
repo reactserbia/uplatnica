@@ -21,7 +21,7 @@
         "styled-components": "^5.3.10"
     },
     "devDependencies": {
-        "@types/react": "^18.0.38",
+        "@types/react": "^18.2.11",
         "@vitejs/plugin-react": "^3.1.0",
         "compass-mixins": "^0.12.12",
         "eslint": "^8.23.0",
