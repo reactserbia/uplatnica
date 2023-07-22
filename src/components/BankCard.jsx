@@ -1,15 +1,15 @@
-import banksData from '../constants/bankData';
-import S from 'styled-components';
+import banksData from '../constants/bankData'
+import S from 'styled-components'
 
-function BankCard({bankNumber}) {
+function BankCard({ bankNumber }) {
+    const bankName = banksData[bankNumber]?.name ?? 'Nepostojeća banka'
 
-const bankName = banksData[bankNumber]?.name ?? 'Nepostojeća banka';
-
-  return (
-  <BankCardWrapper>
-     <BankName>Ovaj račun pripada: {bankName}</BankName>
-  </BankCardWrapper>
-   )}
+    return (
+        <BankCardWrapper>
+            <BankName>Ovaj račun pripada: {bankName}</BankName>
+        </BankCardWrapper>
+    )
+}
 
 const BankCardWrapper = S.div`
 display: flex;
@@ -27,4 +27,4 @@ overflow: hidden;
 text-overflow: ellipsis;
 `
 
-export default BankCard;
+export default BankCard

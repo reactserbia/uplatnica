@@ -1,0 +1,17 @@
+rules:
+    master:
+        level: off
+    slave:
+        level: failure
+        message: >
+            Please consider an alternative to ``. 
+
+            See http://example.com/ for more information
+    foo:
+        regex:
+            - /foo/gi
+            - /foobar/gi
+        level: failure
+ignore:
+    - '.github/in-solidarity.yml' # default
+    - '**/*.yml'
