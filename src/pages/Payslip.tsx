@@ -9,7 +9,14 @@ import Modal from '../components/Modal.jsx'
 import SavedTemplates from '../components/SavedTemplates.jsx'
 import SaveCurrentTemplate from '../components/SaveCurrentTemplate.jsx'
 import { ModelCodeOptions, PayCodeOptions } from '../constants/codeOptions.js'
-
+import styled from 'styled-components';
+import { QRCodeSVG } from 'qrcode.react'
+import Input from '../components/Input.js'
+import SplittedInput from '../components/SplittedInput.js'
+import Textarea from '../components/Textarea.js'
+import { deviceBrakepoints } from '../config/device-brakepoints.js'
+import { PayCodeOptionsType, ModelCodeOptionsType } from '../constants/type.js'
+import { createQrModel } from '../utils/qrModelUtils.js'
 
 //TODO: change value param to string or vice versa
 
@@ -415,6 +422,7 @@ function Payslip() {
                 }</>
     )
 }
+
 
 const Container = styled.div`
     width: 100%;
