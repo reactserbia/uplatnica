@@ -32,4 +32,4 @@ overflow: hidden;
 text-overflow: ellipsis;
 `
 
-export default BankCard;
+export default BankCard
