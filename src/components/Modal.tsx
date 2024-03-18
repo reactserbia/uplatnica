@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { deviceBrakepoints } from '../config/device-brakepoints'
 import S from 'styled-components';
 
 interface ModalProps {
@@ -46,16 +47,21 @@ justify-content: center;
 align-items: center;
 background-color: rgba(39,34,100, 0.5);
 `
-const Content = S.div
-`width: 50%;
- height:50%;
- display: flex;
- flex-direction: column;
- align-items: flex-start;
- background-color: white;
- padding: 1rem;
- text-align:start;
- overflow: auto;
+const Content = S.div`
+  width: 80%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: rgb(36, 36, 36);
+  padding: 1rem;
+  text-align:start;
+  overflow: auto;
+
+  @media ${deviceBrakepoints.mobile} {
+    width: 80%;
+    height: 80%;
+  }
 `
 const CloseBtn = S.button
 `align-self: flex-end;
