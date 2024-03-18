@@ -1,9 +1,11 @@
-import Label from './Label.jsx'
+import Label from './Label.tsx'
 import S from 'styled-components'
 import Select from 'react-select'
+import React from 'react'
+import { ModelCodeOptionsType, PayCodeOptionsType } from '../constants/type.ts'
 
 const ModelselectStyles = {
-    control: styles => ({
+    control: (styles: any) => ({
         ...styles,
         borderRadius: '0',
         backgroundColor: 'lightgrey',
@@ -12,23 +14,23 @@ const ModelselectStyles = {
         boxShadow: 'none',
         top: '-1px'
     }),
-    menu: styles => ({
+    menu: (styles: any) => ({
         ...styles,
         white: '200px'
     }),
-    menuList: styles => ({
+    menuList: (styles: any) => ({
         ...styles,
         background: 'white',
         color: 'lightgray'
     }),
-    option: (styles, { isFocused, isSelected }) => ({
+    option: (styles: any, { isFocused, isSelected }: any) => ({
         ...styles,
         background: isFocused ? 'gray' : isSelected ? 'lightgrey' : 'undefined',
         zIndex: 1
     })
 }
 
-const theme = theme => ({
+const theme = (theme: { colors: any; spacing: any }) => ({
     ...theme,
     colors: {
         ...theme.colors,
@@ -44,7 +46,20 @@ const theme = theme => ({
     }
 })
 
-const Modelselect = ({ width, placeholder, helpId, helpText, label, value, whenChanged, options }) => (
+interface ModelselectProps {
+    width: number;
+    placeholder: string;
+    helpId: string;
+    helpText:string;
+    label: string;
+    value: string;
+    whenChanged: (e:any) => void;
+    options: PayCodeOptionsType[] | ModelCodeOptionsType[];
+}
+
+
+
+const Modelselect:React.FC<ModelselectProps> = ({ width, placeholder, helpId, helpText, label, value, whenChanged, options }) => (
     <Container width={width}>
         <Label label={label} />
         <Select
@@ -61,8 +76,11 @@ const Modelselect = ({ width, placeholder, helpId, helpText, label, value, whenC
         <span hidden id={helpId}>{helpText}</span>
     </Container>
 )
+interface ContainerProps {
+    width: number;
+ };
 
-const Container = S.div`
+const Container = S.div<ContainerProps>`
    display: inline-block;
    text-align: left;
    margin-bottom: 7px;

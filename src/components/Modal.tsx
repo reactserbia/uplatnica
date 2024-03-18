@@ -1,11 +1,16 @@
 import React, { useEffect } from 'react'
 import S from 'styled-components';
 
-const Modal = ({closeModal, children}) => {
+interface ModalProps {
+  closeModal: () => void;
+  children: React.ReactNode;
+}
+
+const Modal:React.FC<ModalProps> = ({closeModal, children}) => {
  
- const handleClickOutside = (event) => {
-    const target = event.target;
-    if (target.id === 'backdrop') {
+ const handleClickOutside = (event: MouseEvent) => {
+    const target = event.target as HTMLElement;
+    if (target?.id === 'backdrop') {
         closeModal()
     }
   };
@@ -47,7 +52,7 @@ const Content = S.div
  display: flex;
  flex-direction: column;
  align-items: flex-start;
- background-color: #242424;
+ background-color: white;
  padding: 1rem;
  text-align:start;
  overflow: auto;

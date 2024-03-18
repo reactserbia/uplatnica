@@ -1,8 +1,26 @@
-import InputGroup from './InputGroup.jsx'
+import React from 'react'
+import InputGroup from './InputGroup.tsx'
 import S from 'styled-components'
-import { deviceBrakepoints } from '@config/device-brakepoints.jsx'
+import { deviceBrakepoints } from '../config/device-brakepoints.ts'
 
-const SplittedInput = ({ legend, inputs }) => (
+export interface InputsProps {
+    type: string;
+    width: number;
+    value: string;
+    pattern: string;
+    required: boolean;
+    errorMessage: string;
+    ariaLabel: string;
+    whenChanged: (e: any) => void;
+    appendZeros?: (v:any) => void;
+}
+
+interface SplittedInputProps {
+    legend: string;
+    inputs: InputsProps[];
+}
+
+const SplittedInput:React.FC<SplittedInputProps> = ({ legend, inputs }) => (
     <Container>
         <Legend>{legend}</Legend>
         {inputs.map((input, index) => (

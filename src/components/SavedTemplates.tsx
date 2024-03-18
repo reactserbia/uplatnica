@@ -1,19 +1,25 @@
 import React, { useState } from 'react'
+import { CurrentTemplate } from '../pages/Payslip';
 import S from 'styled-components';
 
-const SavedTemplates = ({useTemplate}) => {
+interface SavedTemplatesProps {
+  useTemplate: (template: CurrentTemplate) => void;
+}
+
+const SavedTemplates:React.FC<SavedTemplatesProps> = ({useTemplate}) => {
   const[clearallTemplatedMsg, setClearedAllTemplatesMsg] = useState('');
   const[templatedIsUsedMsg, setTemplateIsUsedMsg] = useState('');
 
-  const templates = JSON.parse(localStorage.getItem('templates')) ?? [];
+  const pullTemplates = localStorage.getItem('templates');
+  const templates = pullTemplates !== null ? JSON.parse(pullTemplates) : [];
 
-  const handleUseTemplate = (template) => {
+  const handleUseTemplate = (template: CurrentTemplate) => {
     useTemplate(template);
     setTemplateIsUsedMsg('Šablon je upotrebljen');
   };
 
   const generateAllSavedTemplates = () => {
-        return templates.map((item) => 
+        return templates.map((item: CurrentTemplate) => 
         <SingleTemplate key={item.name}>
           {item?.name} <UseTemplateBtn onClick={() => handleUseTemplate(item)}>Upotrebi šablon</UseTemplateBtn>
           </SingleTemplate>
@@ -41,7 +47,7 @@ const SavedTemplates = ({useTemplate}) => {
 }
 
 const TemplateListWrapper = S.div
-` background-color: rgb(44 47 49);
+` background-color: white;
  width:100%;
  margin-top: 1rem;
  padding: 0.5rem;

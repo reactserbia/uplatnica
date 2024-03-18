@@ -1,16 +1,33 @@
-import Label from './Label.jsx'
+import React from 'react';
+import { deviceBrakepoints } from '../config/device-brakepoints'
+import Label from './Label'
 import S from 'styled-components'
-import { deviceBrakepoints } from '@config/device-brakepoints.jsx'
 
-const Input = ({ type = 'text', id, help, helpText, disabled, width, label, value, whenChanged }) => (
+interface InputProps {
+   type?: string;
+   id: string;
+   help: string;
+   helpText: string;
+   disabled?: boolean;
+   width: number;
+   label: string;
+   value: string | number; 
+   whenChanged: (e:React.ChangeEvent<HTMLInputElement>) => void;
+};
+
+const Input:React.FC<InputProps> = ({ type = 'text', id, help, helpText, disabled, width, label, value, whenChanged }) => (
     <Container width={width} >
-        <Label label={label} for={id}/>
+        <Label label={label} forId={id}/>
         <InnerInput type={type} name={id} id={id} aria-describedby={help} disabled={disabled} value={value} onChange={whenChanged} />
         <span hidden id={help}>{helpText}</span>
     </Container>
 )
 
-const Container = S.div`
+interface ContainerProps {
+   width: number;
+};
+
+const Container = S.div<ContainerProps>`
    display: inline-block;
    text-align: left;
    margin-bottom: 7px;

@@ -1,90 +1,125 @@
-const banksData = {
-    105: {
+interface BanksDataType {
+    bankNumber: string;
+    name: string;
+    img: string;
+};
+const banksData:BanksDataType[] = [
+        {
+        bankNumber: '105',
         name: 'AGROINDUSTRIJSKO KOMERCIJALNA  BANKA AIK BANKA, AD, BEOGRAD',
         img: '',
     },
     
-     115: {
+    
+    {
+        bankNumber: '115',
         name: 'MOBI BANKA, AD, BEOGRAD',
         img: '',
     },
-    145: {
+
+    {
+        bankNumber: '145',
         name: 'EXPOBANK,AD,BEOGRAD',
         img: '',
     },
-    155: {
+
+    {
+        bankNumber: '155',
         name: 'HALKBANK, AD, BEOGRAD',
         img: '',
     },
-    160: {
+
+    {
+        bankNumber: '160',
         name: 'BANCAINTESA,AD,BEOGRAD',
         img: '',
     },
-    165: {
+
+    {
+        bankNumber: '165',
         name: 'ADDIKO BANK, AD, BEOGRAD',
         img: '',
     },
-    170: {
+
+    {
+        bankNumber: '170',
         name: 'UNICREDIT BANK SRBIJA, AD, BEOGRAD',
         img: '',
     },
-    190: {
+    {
+        bankNumber: '190',
         name: 'ALTA BANKA, AD, BEOGRAD',
         img: '',
     },
-    200: {
+
+    {
+        bankNumber: '200',
         name: 'BANKA POSTANSKA  STEDIONICA, AD, BEOGRAD',
         img: '',
     },
-    205: {
+    
+    {
+        bankNumber: '205',
         name: 'NLB KOMERCIJALNABANKA,AD, BEOGRAD',
         img: '',
     },
-    220: {
+
+    {
+        bankNumber: '220',
         name: 'PROCREDIT BANK, AD, BEOGRAD',
         img: '',
     },
-    250: {
+     {
+        bankNumber: '250',
         name: 'EUROBANK DIREKTNA, AD, BEOGRAD',
         img: '',
     },
-    265: {
+     {
+        bankNumber: '265',
         name: 'RAIFFEISEN BANKA, AD, BEOGRAD',
         img: '',
     },
-    295: {
+     {
+        bankNumber: '295',
         name: 'SRPSKA BANKA, AD, BEOGRAD',
         img: '',
     },
-    325: {
+     {
+        bankNumber: '325',
         name: 'OTP BANKA SRBIJA AKCIONARSKO  DRUSTVO NOVI SAD',
         img: '',
     },
-    330: {
+     {
+        bankNumber: '330',
         name: 'RBA BANKA, AD, NOVI SAD',
         img: '',
     },
-    340: {
+     {
+        bankNumber: '340',
         name: 'ERSTE BANK, AD, NOVI SAD',
         img: '',
     },
-    370: {
+     {
+        bankNumber: '370',
         name: '3 BANKA, AD, NOVI SAD',
         img: '',
     },
-    375: {
+     {
+        bankNumber: '375',
         name: 'API BANK, AD, BEOGRAD',
         img: '',
     },
-    380: {
+     {
+        bankNumber: '380',
         name: 'MIRABANK, AD, BEOGRAD',
         img: '',
     },
-    385: {
+     {
+        bankNumber: '385',
         name: 'BANK OF CHINA SRBIJA, AD, BEOGRAD - NOVI BEOGRAD',
         img: '',
     },
 
-};
+];
 
 export default banksData;

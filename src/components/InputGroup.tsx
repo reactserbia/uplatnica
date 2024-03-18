@@ -1,14 +1,22 @@
-import ErrorMessage from './ErrorMessage.jsx'
+import React from 'react'
+import ErrorMessage from './ErrorMessage'
 import S from 'styled-components'
 import { useState } from 'react'
+import { InputsProps } from './SplittedInput';
 
-const InputGroup = ({ input, index }) => {
+interface InputGroupProps {
+    input: InputsProps;
+    index: number;
+}
+
+const InputGroup:React.FC<InputGroupProps> = ({ input, index }) => {
     const [focused, setFocused] = useState(false)
 
-    const handleFocus = event => {
+    const handleFocus = (event: React.FocusEvent<HTMLInputElement>) => {
         setFocused(true)
         if (input?.appendZeros && event.target.value.length < 13) input.appendZeros(event.target.value)
     }
+
     return (
         <StyledInputGroup width={input.width}>
             <StyledInput
@@ -27,7 +35,11 @@ const InputGroup = ({ input, index }) => {
     )
 }
 
-const StyledInputGroup = S.div`
+interface StyledInputGroup {
+    width: number;
+ };
+
+const StyledInputGroup = S.div<StyledInputGroup>`
 width: ${props => (props.width ? props.width : '100')}%;
 display: inline-block;
 `
